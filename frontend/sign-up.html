@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My HTML Project with Tailwind CSS and Flowbite</title>
+  <link href="/src/styles.css" rel="stylesheet">
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+</head>
+<body class="bg-white dark:bg-dark font-inter">
+
+  <!-- <div class="relative h-full w-full bg-slate-950"><div class="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div><div class="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div></div> -->
+
+    <nav class="bg-white dark:bg-dark fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="./public/lamairie-ged-logo.svg" class="h-8" alt="Flowbite Logo">
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
+      </a>
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+          
+          <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
+      </div>
+      <!-- <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <li>
+            <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+          </li>
+        </ul>
+      </div> -->
+      </div>
+    </nav>
+
+
+  
+  <section class="h-full flex items-center justify-center">
+
+    <div class="max-w-lg mt-[7%] p-8 px-12 items-center justify-center text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-dark dark:border-gray-700">
+      <!-- <div class="logo-container mb-5 flex w-full justify-center gap-3 align-middle">
+        <img src="./public/lamairie-ged-logo.svg" alt="logo" srcset="" class="">
+        <span class="font-normal text-black dark:text-secondary leading-loose">La Mairie <span class="text-primary">GED</span></span>
+      </div> -->
+      <h2 class="font-inter font-light text-2xl text-black dark:text-secondary">Crée un compte</h2>
+      <p class="mb-3 mt-3 font-light text-xs text-black dark:text-secondary">Vous avez deja un compte? <a href="sign-in.html" class="text-primary">Se connecte</a></p>
+
+      <form class="space-y-4 md:space-y-6 text-start" action="#">
+        <div>
+          <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+          <input type="text" name="full_name" id="full_name" placeholder="Nom complet du citoyen" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+        </div>
+        <div>
+          <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+          <input type="email" name="email" id="email" placeholder="name@company.com" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+        </div>
+
+        
+        <div class="w-full flex flex-row gap-2 items-end">
+          <div class="w-full">
+            <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Date de naissance</label>
+            <input type="date" name="birth_day" id="birth_day" placeholder="Date de naissance" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+          </div>
+          <div  class="w-full">
+            <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+            <input type="text" name="birth_place" id="birth_place" placeholder="Lieu de naissance" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+          </div>
+        </div>
+
+        <div>
+          <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+          <input type="text" name="adress" id="email" placeholder="Adresse" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+        </div>
+
+        <div class="w-full flex flex-row gap-2 items-end">
+          <div class="w-full">
+            <!-- <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Date de naissance</label> -->
+            <input type="text" name="nationality" id="nationality" placeholder="Nationalite" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+          </div>
+          <div  class="w-full">
+            <select id="sexe" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+              <option selected>Chosir un sexe</option>
+              <option value="M">United States</option>
+              <option value="F">Canada</option>
+              <option value="Other">Autre</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Photo de profile de l'utilisateur <span class="text-primary font-bold text-sm">*</span></label>
+          <div class="flex items-center space-x-6">
+            <div class="shrink-0">
+              <img id='preview_img' class="h-16 w-16 object-cover rounded-2xl" src="data:image/png;base64,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" alt="Current profile photo" />
+            </div>
+            <label class="block">
+              <span class="sr-only">Chosir sa photo de profil</span>
+              <input type="file" onchange="loadFile(event)" class="block w-full text-sm text-slate-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:text-sm file:font-semibold
+                file:bg-slate-300 file:text-violet-700
+                hover:file:bg-violet-100"/>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Carte d’identite ou passport national <span class="text-primary font-bold text-sm">*</span></label>
+          <div class="flex items-center space-x-6">
+            <div class="shrink-0">
+              <img id='preview_img' class="h-16 w-16 object-cover rounded-2xl" src="data:image/png;base64,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" alt="acrobat file" />
+            </div>
+            <label class="block">
+              <span class="sr-only">Chosir sa photo de profil</span>
+              <input type="file" onchange="" class="block w-full text-sm text-slate-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:text-sm file:font-semibold
+                file:bg-slate-300 file:text-violet-700
+                hover:file:bg-violet-100"/>
+            </label>
+          </div>
+        </div>
+
+            
+
+
+        <div>
+          <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+          <input type="password" name="password" id="password" placeholder="Password" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+        </div>
+
+        <div>
+          <!-- <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label> -->
+          <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+        </div>
+        <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-normal text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+            </div>
+        </div>
+
+        <a href="#" class="inline-flex items-center w-full px-3 py-2 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
+          Crée un compte
+          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg>
+        </a>
+      </form>
+    </div>
+
+  </section>
+
+
+
+
+<script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="./src/main.js"></script>
+<script>
+  var loadFile = function(event) {
+      
+      var input = event.target;
+      var file = input.files[0];
+      var type = file.type;
+
+     var output = document.getElementById('preview_img');
+
+
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+      }
+  };
+</script>
+</body>
+</html>
