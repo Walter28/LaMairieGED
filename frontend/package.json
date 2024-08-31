@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.20",
+    "datatables.net": "^2.1.5",
+    "datatables.net-dt": "^2.1.5",
     "flowbite": "^2.5.1"
   }
 }
