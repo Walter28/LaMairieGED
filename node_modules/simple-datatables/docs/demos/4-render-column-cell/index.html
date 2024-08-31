@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+        <title>Custom cell renderer - simple-datatables</title>
+        <!-- DataTable Styles -->
+        <link rel="stylesheet" href="../dist/css/style.css">
+        <!-- Demo Styles -->
+        <link rel="stylesheet" href="../demo.css">
+        <!-- Custom Styles -->
+        <style>
+            .buy-now {
+                background-color: #056b05;
+            }
+
+            .caffeinated {
+                color: limegreen;
+            }
+            .uncaffeinated {
+                color: red;
+            }
+
+            .currency {}
+            .currency:before {
+                content: "$ "
+            }
+            .currency--profit {
+                color: limegreen;
+            }
+            .currency--loss {
+                color: red;
+            }
+            .currency--zero {
+                color: #808080;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>
+                <a href="../../">simple-datatables</a>
+            </h1>
+            <a href="../../documentation">Documentation</a>
+            <a href="../">Demos</a>
+        </header>
+
+        <h2>Custom cell renderer</h2>
+
+        <table id="drinks"></table>
+
+        <script src="../dist/umd.js"></script>
+        <script>
+            const data = {
+                headings: ["ID", "Drink", "Price", "Caffeinated", "Profit"],
+                data: [
+                    [574, "Latte", 4.00, false, 0.00],
+                    [984, "Herbal tea", 3.00, false, 0.56],
+                    [312, "Green tea", 3.00, true, 1.72],
+                    [312, "Latte", 3.00, true, -1.21],
+                    [312, "Green tea", 3.00, false, 0.00],
+                    [312, "Green tea", 3.00, false, 0.00],
+                    [312, "Green tea", 3.00, true, 1.72],
+                    [312, "Latte", 3.00, true, 1.72],
+                    [312, "Green tea", 3.00, true, -1.21],
+                    [312, "Green tea", 3.00, false, 0.00],
+                    [312, "Green tea", 3.00, true, 1.72],
+                    [312, "Green tea", 3.00, true, 1.72],
+                    [312, "Latte", 3.00, false, 0.00],
+                    [312, "Latte", 3.00, true, 1.72],
+                    [312, "Green tea", 3.00, false, 0.00],
+                    [312, "Green tea", 3.00, true, 1.72],
+                    [312, "Latte", 3.00, false, 0.00],
+                    [312, "Latte", 3.00, true, -1.21],
+                    [312, "Latte", 3.00, true, 1.72],
+                    [312, "Latte", 3.00, false, 0.00],
+                    [312, "Latte", 3.00, false, 0.00],
+                    [312, "Latte", 3.00, true, 1.72],
+                    [312, "Green tea", 3.00, true, -1.21],
+                    [312, "Green tea", 3.00, true, -1.21],
+                    [312, "Green tea", 3.00, true, -1.21]
+                ]
+            }
+            // Add Icon
+            const renderIcon = function(data, _cell, _dataIndex, _cellIndex) {
+                if (data === "Latte") {
+                    return `☕ ${data}`
+                } else if (data === "Green tea") {
+                    return `🍵 ${data}`
+                }
+                return `🌿 ${data}`
+            }
+            // Price column cell manipulation
+            const renderButton = function(data, cell, dataIndex, _cellIndex) {
+                cell.childNodes.push({
+                    nodeName: "BUTTON",
+                    attributes: {
+                        "data-row": dataIndex,
+                        class: "buy-now"
+                    },
+                    childNodes: [
+                        {
+                            nodeName: "#text",
+                            data: "Buy Now!"
+                        }
+                    ]
+                })
+            }
+            // Caffeinated column cell manipulation
+            const renderYesNo = function(data, cell, _dataIndex, _cellIndex) {
+
+                if ([true, false].includes(data)) {
+                    cell.childNodes = [
+                        {
+                            nodeName: "SPAN",
+                            attributes: {
+                                class: data === true ? "caffeinated" : "uncaffeinated"
+                            },
+                            childNodes: [
+                                {
+                                    nodeName: "#text",
+                                    data: data === true ? "Yes" : "No"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+
+            // numbers
+            const renderHighLow = function(data, cell, _dataIndex, _cellIndex) {
+                const cellTextNode = cell.childNodes[0]
+                const currencyNode = {
+                    nodeName: "SPAN",
+                    attributes: {
+                        class: "currency "
+                    },
+                    childNodes: [cellTextNode]
+                }
+                cell.childNodes = [currencyNode]
+
+                if (data < 0) {
+                    currencyNode.attributes.class += "currency--loss"
+                } else if (data > 0) {
+                    currencyNode.attributes.class += "currency--profit"
+                } else if (data === 0) {
+                    currencyNode.attributes.class += "currency--zero"
+                }
+            }
+            new window.simpleDatatables.DataTable("#drinks", {
+                data,
+                rowRender: (row, tr, _index) => {
+                    if ([true, false].includes(row.cells[3].data)) {
+                        if (!tr.attributes) {
+                            tr.attributes = {}
+                        }
+                        if (!tr.attributes.class) {
+                            tr.attributes.class = row.cells[3].data === true ? "yes" : "no"
+                        } else {
+                            tr.attributes.class += row.cells[3].data === true ? "yes" : "no"
+                        }
+
+                    }
+                },
+                columns: [
+                    {
+                        select: 0,
+                        hidden: true,
+                        type: "number"
+                    }, {
+                        select: 1,
+                        render: renderIcon,
+                        type: "string"
+                    }, {
+                        select: 2,
+                        render: renderButton,
+                        type: "number"
+                    }, {
+                        select: 3,
+                        render: renderYesNo,
+                        type: "boolean"
+                    }, {
+                        select: 4,
+                        render: renderHighLow,
+                        type: "number"
+                    }
+                ]
+            })
+        </script>
+    </body>
+</html>
