@@ -14,6 +14,7 @@ body {
     padding: 20px;
 }
 
-.dark #kits tr{
-  font-size: small;
+/* login styles.css */
+.bg-custom-gradient {
+    background: linear-gradient(0deg, rgba(19, 19, 21, 0.14) 0%, rgba(19, 19, 21, 1) 100%);
 }

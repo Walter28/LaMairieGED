@@ -5,59 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My HTML Project with Tailwind CSS and Flowbite</title>
   <link href="/src/styles.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </head>
-<body class="bg-white dark:bg-dark font-inter">
+<body class="bg-white dark:bg-dark font-inter h-full">
 
     <!-- Navbar -->
-    <nav class="bg-white dark:bg-dark fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-cardStroke">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="./public/lamairie-ged-logo.svg" class="h-8" alt="Flowbite Logo">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
-        </a>
-        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-            
-            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-              <span class="sr-only">Open main menu</span>
-              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-              </svg>
-          </button>
-        </div>
-        <!-- <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-            </li>
-          </ul>
-        </div> -->
-        </div>
-    </nav>
 
-    <!-- Main section of the document -->
-    <main class="mt-[7%] h-20 border rounded-b-xl dark:border-cardStroke dark:text-secondary conteneur">
     
+    <!-- Main section of the document -->
+    <main class="w-full flex justify-center items-center h-screen">
+
+
+
+
         
-        naddadfad
-
-
-
         
         
+        <section class="flex w-[70%] h-[80%] bg-white shadow-sm border dark:border-cardFill dark:shadow-slate-600 rounded-sm">
+            <div class="relative w-[50%] aspect-[16/9] bg-no-repeat bg-cover bg-center bg-[url('/public/login-bg.jpeg')]">
+                <div class="absolute inset-0 bg-[#1C1C21] opacity-20"></div>
+                <div class="w-full h-full flex justify-center items-center">
+                    <div class="w-[50%] p-5 h-[30%] text-center bg-custom-gradient border-t-4 border-t-primary">
+                        <p class="uppercase text-bold text-lg text-white">Commander votre
+                            document en un clic </p>
 
+                        <a href="#" class="flex justify-center items-center text-center space-x-3 my-3 rtl:space-x-reverse">
+                            <img src="./public/lamairie-ged-logo.svg" class="h-6" alt="LaMairieGED Logo">
+                            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-right w-[50%] flex justify-center items-center bg-white dark:bg-dark">
+                <div class="login-container w-[70%] h-[80%] items-center justify-center text-center">
+                    <h2 class="font-inter font-light text-2xl text-black dark:text-secondary">Bienvenu dans LaMairie <span class="text-primary">GED</span></h2>
+                    <p class="mb-3 mt-3 font-light text-xs text-black dark:text-secondary">Vous n'avez pas de compte? <a href="sign-up.html" class="text-primary">Cree un compte</a></p>
+
+                    <form class="space-y-1 mt-10 md:space-y-3 text-start" action="#">
+
+                        <div>
+                            <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Adresse email <span class="text-primary font-bold text-sm">*</span></label>
+                          <input type="email" name="email" id="email" placeholder="noms@company.com" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Mot de passe <span class="text-primary font-bold text-sm">*</span></label>
+                          <input type="password" name="password" id="password" placeholder="••••••••••" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                        </div>
+                
+                        <button href="#" class="inline-flex items-center w-full px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
+                          Crée un compte
+                          <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                          </svg>
+                        </button>
+                      </form>
+
+                      <div class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">Or</div>
+
+                      <button type="button" class="text-dark w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-xs font-normal rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-dark dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                        <svg class="w-4 h-auto" width="44" height="45" viewBox="0 0 46 47" fill="none">
+                            <path d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z" fill="#4285F4"/>
+                            <path d="M23.4694 47C29.8061 47 35.1161 44.9144 39.0179 41.3012L31.625 35.5437C29.6301 36.9244 26.9898 37.8937 23.4987 37.8937C17.2793 37.8937 12.0281 33.7812 10.1505 28.1412L9.88649 28.1706L2.61097 33.7812L2.52296 34.0456C6.36608 41.7125 14.287 47 23.4694 47Z" fill="#34A853"/>
+                            <path d="M10.1212 28.1413C9.62245 26.6725 9.32908 25.1156 9.32908 23.5C9.32908 21.8844 9.62245 20.3275 10.0918 18.8588V18.5356L2.75765 12.8369L2.52296 12.9544C0.909439 16.1269 0 19.7106 0 23.5C0 27.2894 0.909439 30.8731 2.49362 34.0456L10.1212 28.1413Z" fill="#FBBC05"/>
+                            <path d="M23.4694 9.07688C27.8699 9.07688 30.8622 10.9863 32.5344 12.5725L39.1645 6.11C35.0867 2.32063 29.8061 0 23.4694 0C14.287 0 6.36607 5.2875 2.49362 12.9544L10.0918 18.8588C11.9987 13.1894 17.25 9.07688 23.4694 9.07688Z" fill="#EB4335"/>
+                        </svg>
+                        Sign up with Google
+                      </button>
+
+                      <button type="button" class="text-dark w-full my-3 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-xs font-normal rounded-lg border border-gray-200 bg-white shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-dark dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"/>
+                          </svg>
+                          
+                        Sign up with Github
+                      </button>
+
+                      <a href="#" class="text-light text-xs float-right text-primary">Mot de passe oublie ?</a>
+                </div>
+            </div>
+        </section>
         
         
 
@@ -71,5 +107,124 @@
 
 <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="./src/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+<script>
+    // if you installed via CDN
+
+    (options, dom) => `<div class='${options.classes.top}'>
+        ${
+        options.paging && options.perPageSelect ?
+            `<div class='${options.classes.dropdown}'>
+                <label>
+                    <select class='${options.classes.selector}'></select> ${options.labels.perPage}
+                </label>
+            </div>` :
+            ""
+    }
+        ${
+        options.searchable ?
+            `<div class='${options.classes.search}'>
+                <input class='${options.classes.input}' placeholder='${options.labels.placeholder}' type='search' title='${options.labels.searchTitle}'${dom.id ? ` aria-controls="${dom.id}"` : ""}>
+            </div>` :
+            ""
+    }
+    </div>
+    <div class='${options.classes.container}'${options.scrollY.length ? ` style='height: ${options.scrollY}; overflow-Y: auto;'` : ""}></div>
+    <div class='${options.classes.bottom}'>
+        ${
+        options.paging ?
+            `<div class='${options.classes.info}'></div>` :
+            ""
+    }
+        <nav class='${options.classes.pagination}'></nav>
+    </div>`
+
+    const customData = {
+        "headings": [
+            "Name",
+            "Company",
+            "Date",
+        ],
+        "data": [
+            [
+                "Flowbite",
+                "Bergside",
+                "05/23/2023",
+            ],
+            [
+                "Next.js",
+                "Vercel",
+                "03/12/2024",
+            ],
+        ]
+        };
+
+    const dataTable = new simpleDatatables.DataTable("#export-table", {
+
+        //custom data
+        data: customData,
+
+        //pagination
+        paging: true, // enable or disable pagination
+        perPage: 10, // set the number of rows per page
+        perPageSelect: [5, 10, 20, 50], // set the number of rows per page options
+        firstLast: true, // enable or disable the first and last buttons
+        nextPrev: true, // enable or disable the next and previous buttons
+
+        //searching
+        searchable: true, // enable or disable searching
+        sensitivity: "base", // set the search sensitivity (base, accent, case, variant)
+        searchQuerySeparator: " ", // set the search query separator
+
+        //sorting
+        sortable: true, // enable or disable sorting
+        locale: "en-US", // set the locale for sorting
+        numeric: true, // enable or disable numeric sorting
+        caseFirst: "false", // set the case first for sorting (upper, lower)
+        ignorePunctuation: true, // enable or disable punctuation sorting
+
+        // Apparance
+        caption: "Flowbite is an open-source library",
+        aption: "Flowbite is an open-source library",
+        classes: {
+            active: "datatable-active",
+        bottom: "datatable-bottom",
+        container: "datatable-container",
+        cursor: "datatable-cursor",
+        dropdown: "datatable-dropdown",
+        ellipsis: "datatable-ellipsis",
+        empty: "datatable-empty",
+        headercontainer: "datatable-headercontainer",
+        info: "datatable-info",
+        input: "datatable-input",
+        loading: "datatable-loading",
+        pagination: "datatable-pagination",
+        paginationList: "datatable-pagination-list",
+        search: "datatable-search",
+        selector: "datatable-selector",
+        sorter: "datatable-sorter",
+        table: "datatable-table",
+        top: "datatable-top",
+        wrapper: "datatable-wrapper"
+        },
+        footer: true, // enable or disable the footer
+        header: true, // enable or disable the header
+        labels: {
+            placeholder: "Search...",
+            searchTitle: "Search within table",
+            pageTitle: "Page {page}",
+            perPage: "entries per page",
+            noRows: "No entries found",
+            info: "Showing {start} to {end} of {rows} entries",
+            noResults: "No results match your search query",
+        },
+        template: (options, dom) => {
+            // add custom HTML template for the table, full list: https://fiduswriter.github.io/simple-datatables/documentation/template
+        },
+        scrollY: "300px", // enable vertical scrolling
+    
+    });
+
+</script>
 </body>
 </html>
