@@ -26,7 +26,7 @@ class User extends Authenticatable
         'nationality',
         'sexe',
         'role',
-        'profil_pic',
+        'profile_pic',
         'identity_card',
         'password',
     ];
@@ -51,13 +51,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function documents()
+    /**
+     * Get the demandes for the user.
+     */
+    public function demandes(): HasMany
     {
-        return $this->hasMany(Document::class);
+        return $this->hasMany(Demande::class);
     }
 
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class);
-    }
 }

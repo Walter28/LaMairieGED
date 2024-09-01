@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('sexe');
             $table->string('role');
-            $table->string('profil_pic')->nullable();
+            $table->string('profile_pic')->nullable();
             $table->string('identity_card')->nullable();
             $table->string('password');
             $table->timestamps();
