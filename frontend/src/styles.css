@@ -9,12 +9,29 @@ body {
   }
 
 .conteneur{
-    margin-left: 30px;
-    margin-right: 30px;
-    padding: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 50px;
 }
 
 /* login styles.css */
 .bg-custom-gradient {
     background: linear-gradient(0deg, rgba(19, 19, 21, 0.14) 0%, rgba(19, 19, 21, 1) 100%);
 }
+
+.bg-doc-grandient {
+    background: radial-gradient(circle at 50%, rgba(19, 19, 19, .7) 0%, rgba(156, 51, 86, .2) 100%);
+}
+
+.bg-doc-grandient:hover {
+    cursor: pointer;
+    background: radial-gradient(circle at 50%, rgba(156, 51, 86, .2) 100% rgba(19, 19, 19, .7) 0%);
+}
+
+/* hover for nav bar */
+.custom-ol > li:hover {
+    @apply opacity-90; /* Use Tailwind's apply directive for DRY code */
+    /* You can add more custom styles here */
+  }
+
+  
