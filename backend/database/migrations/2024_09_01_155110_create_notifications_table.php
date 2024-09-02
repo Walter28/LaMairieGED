@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Clé étrangère liée à la table users
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status');
-            $table->timestamps();
+            $table->text('message');
+            $table->timestamps(); // This will add 'created_at' and 'updated_at'
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('notifications');
     }
 };
