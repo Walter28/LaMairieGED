@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    
+
+<script>
+
+    url = 'https://jsonplaceholder.typicode.com/users'
+    url2 = 'http://localhost:8000/api/demandes'
+
+    axios({
+        method: 'get',
+        url: url2
+    })
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err))
+
+</script>
+</body>
+</html>

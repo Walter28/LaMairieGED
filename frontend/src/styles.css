@@ -35,3 +35,36 @@ body {
   }
 
   
+/* Animation pour l'apparition du toast */
+@keyframes toastIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animation pour la disparition du toast */
+@keyframes toastOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Style pour le toast */
+.toast {
+    animation: toastIn 0.5s forwards;
+}
+
+/* Style pour le toast quand il est en train de disparaître */
+.toast.toast-exit {
+    animation: toastOut 0.5s forwards;
+}

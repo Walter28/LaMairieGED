@@ -14,6 +14,7 @@
         document.documentElement.classList.remove('dark')
     }
   </script>
+  <script src="./src/js/authCheckerLogin.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </head>
 <body class="bg-white dark:bg-dark font-inter h-full">
@@ -51,7 +52,7 @@
                     <h2 class="font-inter font-light text-2xl text-black dark:text-secondary">Bienvenu dans LaMairie <span class="text-primary">GED</span></h2>
                     <p class="mb-3 mt-3 font-light text-xs text-black dark:text-secondary">Vous n'avez pas de compte? <a href="sign-up.html" class="text-primary">Cree un compte</a></p>
 
-                    <form class="space-y-1 mt-10 md:space-y-3 text-start" action="#">
+                    <form class="space-y-1 mt-10 md:space-y-3 text-start" id="sigInForm" action="#">
 
                         <div>
                             <label for="birth_day" class="block mb-2 text-xs font-light text-black dark:text-secondary">Adresse email <span class="text-primary font-bold text-sm">*</span></label>
@@ -62,8 +63,8 @@
                             <input type="password" name="password" id="password" placeholder="••••••••••" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
                         </div>
                 
-                        <button href="#" class="inline-flex items-center w-full px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
-                          Crée un compte
+                        <button id="loginButton" type="submit" class="inline-flex items-center w-full px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
+                          Se connecté
                           <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                           </svg>
@@ -94,6 +95,29 @@
                 </div>
             </div>
         </section>
+
+
+
+
+        <!-- Toast Container -->
+        <div id="toast-container" class="fixed bottom-10 right-0 p-4 flex flex-col items-end space-y-4 z-50"></div>
+        <audio id="error-sound" src="./public/audios/error.mp3" preload="auto"></audio>
+        <!-- Toast Template -->
+        <div id="toast-template" class="hidden flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                </svg>
+                <span class="sr-only">Error icon</span>
+            </div>
+            <div class="ms-3 text-sm font-normal">Item has been deleted.</div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            </button>
+        </div>
         
         
 
@@ -106,7 +130,8 @@
 
 
 <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
-<script src="./src/main.js"></script>
+<!-- <script src="./src/js/main.js"></script> -->
+<script src="./src/js/loginController.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
 <script>
     // if you installed via CDN
