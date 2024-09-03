@@ -19,19 +19,19 @@ class AuthController extends Controller
             'address' => 'required|string|max:255',
             'nationality' => 'required|string|max:255',
             'sexe' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'profil_pic' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'role' => 'string|default:citoyen|max:255',
+            'profile_pic' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'identity_card' => 'required|mimes:pdf|max:2048',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $userData = $request->all();
 
-        // Gérer le téléchargement de fichier pour `profil_pic`
-        if ($request->hasFile('profil_pic')) {
-            $fileName = $request->file('profil_pic')->getClientOriginalName();
-            $request->file('profil_pic')->storeAs('public/uploads/'.$userData['email'], $fileName);
-            $userData['profil_pic'] = 'uploads/'.$userData['email'].'/'.$fileName;
+        // Gérer le téléchargement de fichier pour `profile_pic`
+        if ($request->hasFile('profile_pic')) {
+            $fileName = $request->file('profile_pic')->getClientOriginalName();
+            $request->file('profile_pic')->storeAs('public/uploads/'.$userData['email'], $fileName);
+            $userData['profile_pic'] = 'uploads/'.$userData['email'].'/'.$fileName;
         }
 
         // Gérer le téléchargement de fichier pour `identity_card`
