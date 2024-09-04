@@ -44,3 +44,30 @@ themeToggleBtn.addEventListener('click', function() {
 //////////////////////////////////////////////////////////////////////////////////////
 
 
+
+///Fetch user data
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+        // window.location.href = '/sign-in.html'; // Redirect if no token is found
+    } else {
+        var currentUser = localStorage.getItem('currentUser')
+        currentUser = JSON.parse(currentUser)
+        // Optionally, verify the token or fetch user details
+
+        //put the infos some where in the page
+        //on header
+        document.getElementById('user_name').innerText = currentUser.full_name
+        document.getElementById('user_email').innerText = currentUser.email
+
+        const baseURL = 'http://localhost:8000/storage/'; // Replace with your actual backend URL
+        const profilePicPath = currentUser.profile_pic // Path from the object
+        const profilePicURL = baseURL + profilePicPath;
+         // Display the image on the frontend
+        document.getElementById('profile_pic').src = profilePicURL;
+
+
+
+    }
+});

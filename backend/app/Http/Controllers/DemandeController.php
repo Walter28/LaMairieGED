@@ -26,6 +26,7 @@ class DemandeController extends Controller
     // Créer une nouvelle demande
     public function store(Request $request)
     {
+
         $request->validate([
             'type_document_id' => 'required|exists:type_documents,id',
             'status' => 'required|string',
