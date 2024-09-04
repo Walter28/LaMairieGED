@@ -41,7 +41,7 @@ signUpForm.addEventListener('submit', async e => {
             } else {
                 console.error('Il ya eu une erreur lors de l\'enregistrement de l\'utilisateur');
 
-                alert(data.message)
+                // alert(data.message)
                 const errorMessages = Object.values(data.errors).flat();
                 errorMessages.forEach(message => showErrorToast(message));
             }

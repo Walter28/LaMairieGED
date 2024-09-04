@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kid_full_name');
             $table->date('kid_birth_date');
             $table->string('kid_birth_place');
-            $table->string('kid_certficat_medical')->nullable();
+            $table->string('kid_certificat_medical')->nullable();
             $table->string('dad_full_name');
             $table->string('dad_id_card');
             $table->string('mum_full_name');
