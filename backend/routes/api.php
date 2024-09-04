@@ -3,12 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TypeDocumentController;
+use App\Http\Controllers\DemandeController;
+use App\Http\Controllers\ActeDeNaissanceController;
+use App\Http\Controllers\ActeDeMariageController;
+use App\Http\Controllers\NotificationController;
 
-use App\Models\Document;
-use App\Models\Transaction;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,30 +21,75 @@ use App\Models\Transaction;
 |
 */
 
-// Public Document routes
-//transactions routes
-Route::get('/transactions', [TransactionController::class, 'index']);
+// Route pour récupérer tous les documents (publique)
+Route::get('type_documents', [TypeDocumentController::class, 'index']);
+// Route pour récupérer un document par ID (publique)
+Route::get('type_documents/{id}', [TypeDocumentController::class, 'show']);
 
-//documents routes
-Route::get('/documents', [DocumentController::class, 'index']);
+
+// Demandes Routes publiques
+Route::get('/demandes', [DemandeController::class, 'index']);
+Route::get('/demandes/{demande}', [DemandeController::class, 'show']);
+
+
+// Routes publiques Acte de naissance
+Route::get('/actes-de-naissance', [ActeDeNaissanceController::class, 'index']);
+Route::get('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'show']);
+
+
+// Routes publiques Acte de mariage
+Route::get('/actes-de-mariage', [ActeDeMariageController::class, 'index']);
+Route::get('/actes-de-mariage/{acteDeMariage}', [ActeDeMariageController::class, 'show']);
+
 
 //users routes
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
+
 
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
 
-    //transactions routes
-    Route::post('/transactions', [TransactionController::class, 'store']);
-    Route::put('/transactions/{id}', [TransactionController::class, 'update']);
-    Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']);
+    // Route pour créer un nouveau document (authentifiée)
+    Route::post('type_documents', [TypeDocumentController::class, 'store']);
+    // Route pour mettre à jour un document existant (authentifiée)
+    Route::put('type_documents/{id}', [TypeDocumentController::class, 'update']);
+    // Route pour supprimer un document (authentifiée)
+    Route::delete('type_documents/{id}', [TypeDocumentController::class, 'destroy']);
 
-    //documents routes
-    Route::post('/documents', [DocumentController::class, 'store']);
-    Route::put('/documents/{id}', [DocumentController::class, 'update']);
-    Route::delete('/documents/{id}', [DocumentController::class, 'destroy']);
+    // Demandes privates routes
+    Route::post('/demandes', [DemandeController::class, 'store']);
+    Route::put('/demandes/{demande}', [DemandeController::class, 'update']);
+    Route::delete('/demandes/{demande}', [DemandeController::class, 'destroy']);
+
+    //Acte de naissance privates routes
+    Route::post('/actes-de-naissance', [ActeDeNaissanceController::class, 'store']);
+    Route::put('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'update']);
+    Route::delete('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'destroy']);
+
+    //Acte de mariage private routes
+    Route::post('/actes-de-mariage', [ActeDeMariageController::class, 'store']);
+    Route::put('/actes-de-mariage/{acteDeMariage}', [ActeDeMariageController::class, 'update']);
+    Route::delete('/actes-de-mariage/{acteDeMariage}', [ActeDeMariageController::class, 'destroy']);
+
+    //Will keep all notifications privates coz notifications need a user to be connected first
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/{notification}', [NotificationController::class, 'show']);
+    Route::post('/notifications', [NotificationController::class, 'store']);
+    Route::put('/notifications/{notification}', [NotificationController::class, 'update']);
+    Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy']);
+
+
+    // Will keep all chat privates to authenticated users
+    Route::get('/chats', [ChatController::class, 'index']);
+    Route::get('/chats/{chat}', [ChatController::class, 'show']);
+    Route::post('/chats', [ChatController::class, 'store']);
+    Route::put('/chats/{chat}', [ChatController::class, 'update']);
+    Route::delete('/chats/{chat}', [ChatController::class, 'destroy']);
+
 
     //users routes
     Route::post('/logout', [AuthController::class, 'logout']);
