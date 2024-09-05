@@ -17,10 +17,11 @@ class ActeDeNaissanceController extends Controller
         return response()->json($actes);
     }
 
-    // Afficher un acte de naissance spécifique
-    public function show(ActeDeNaissance $acteDeNaissance)
+    // 2. Afficher un acte de naissance spécifique
+    public function show($id)
     {
-        return response()->json($acteDeNaissance);
+        $acte = ActeDeNaissance::findOrFail($id);
+        return response()->json($acte);
     }
 
     // Méthode pour créer un nouvel acte de naissance

@@ -17,45 +17,162 @@
 
     <!-- simple-datatables CSS -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
+    <script src="./src/js/logout.js"></script>
+    <script src="./src/js/checkAccess.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
 
 <body class="bg-white dark:bg-dark font-inter">
 
     <!-- Navbar -->
-    <nav class="bg-white dark:bg-dark fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-cardStroke">
+    <nav class="bg-white dark:bg-dark dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')] fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="./public/lamairie-ged-logo.svg" class="h-8" alt="Flowbite Logo">
-                <span class="self-center text-2xl font-light whitespace-nowrap dark:text-white">LaMairie<span
-                        class="text-primary">GED</span></span>
-            </a>
-            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button id="theme-toggle" type="button"
-                    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                            fill-rule="evenodd" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="./public/lamairie-ged-logo.svg" class="h-6" alt="Flowbite Logo">
+            <span class="self-center text-lg font-light tracking-tight whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
+        </a>
+        <div class="flex flex-row md:order-2 md:space-x-0 items-end space-x-4 gap-5 justify-center rtl:space-x-reverse">
 
-                <button data-collapse-toggle="navbar-sticky" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-sticky" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
 
+
+            <!-- notification bell -->
+            <div class="notification-bell">
+                <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20">
+                    <path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"/>
+                    </svg>
+                    <div class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownNotification" class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
+                    <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+                        Notifications
+                    </div>
+                    <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                        <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-full w-11 h-11" src="data:image/jpeg;base64,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" alt="Jese image">
+                            <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
+                            <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                                <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z"/>
+                                <path d="M4.439 9a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239Z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up? All set for the presentation?"</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
+                        </div>
+                        </a>
+                        <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-2.jpg" alt="Joseph image">
+                            <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
+                            <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span> and <span class="font-medium text-gray-900 dark:text-white">5 others</span> started following you.</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">10 minutes ago</div>
+                        </div>
+                        </a>
+                        <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image">
+                            <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
+                            <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span> and <span class="font-medium text-gray-900 dark:text-white">141 others</span> love your story. See it and view more stories.</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">44 minutes ago</div>
+                        </div>
+                        </a>
+                        <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-4.jpg" alt="Leslie image">
+                            <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-green-400 border border-white rounded-full dark:border-gray-800">
+                            <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                <path d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span> mentioned you in a comment: <span class="font-medium text-blue-500" href="#">@bonnie.green</span> what do you say?</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">1 hour ago</div>
+                        </div>
+                        </a>
+                        <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-5.jpg" alt="Robert image">
+                            <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-purple-500 border border-white rounded-full dark:border-gray-800">
+                            <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                                <path d="M11 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm8.585 1.189a.994.994 0 0 0-.9-.138l-2.965.983a1 1 0 0 0-.685.949v8a1 1 0 0 0 .675.946l2.965 1.02a1.013 1.013 0 0 0 1.032-.242A1 1 0 0 0 20 12V2a1 1 0 0 0-.415-.811Z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="w-full ps-3">
+                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span> posted a new video: Glassmorphism - learn how to implement the new design trend.</div>
+                            <div class="text-xs text-blue-600 dark:text-blue-500">3 hours ago</div>
+                        </div>
+                        </a>
+                    </div>
+                    <a href="#" class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
+                        <div class="inline-flex items-center ">
+                        <svg class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                            <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                        </svg>
+                            View all
+                        </div>
+                    </a>
+                </div>
             </div>
+            
+    
+
+            <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-700 rounded-lg text-xs p-1">
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+
+
+            <!-- user-dropdown -->
+            <div class="user-dropdown">
+                <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 me-2 rounded-full" id="profile_pic" src="data:image/png;base64,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" alt="user photo">
+                    <span class="text-light text-secondary" id="user_name">user name</span>
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                    <div class="font-medium ">Pro User</div>
+                    <div class="truncate" id="user_email">user@email</div>
+                    </div>
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                    </li>
+                    <!-- <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                    </li> -->
+                    </ul>
+                    <div class="py-2">
+                        <a href="#" id="logoutButton" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                    </div>
+                </div>
+            </div>
+    
+          
+            
+        </div>
         </div>
     </nav>
 
@@ -539,130 +656,20 @@
              text-gray-800 focus:outline-none focus:bg-gray-100 py-2.5 disabled:opacity-50 disabled:pointer-events-none
               dark:focus:bg-neutral-700y-2 px-3 ps-9  border-gray-500 shadow-sm rounded-lg text-sm focus:z-1 dark:bg-cardFill 
               dark:text-neutral-400 dark:placeholder-[#b8b8b8] ">
-            <table id="kits">
+              <table id="kits">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="flex items-center">
-                                Nom complet
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Demande
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Label                         
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Date de Demande
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                Date de Récupération
-                            </span>
-                        </th>
-                        <th>
-                            <span class="flex items-center">
-                                ...
-                            </span>
-                        </th>
+                        <th><span class="flex items-center">Nom complet</span></th>
+                        <th><span class="flex items-center">Demande</span></th>
+                        <th><span class="flex items-center">Label</span></th>
+                        <th><span class="flex items-center">Date de Demande</span></th>
+                        <th><span class="flex items-center">Date de Récupération</span></th>
+                        <th><span class="flex items-center">Action</span></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Eli Lilly and Company
-                        </td>
-                        <td>LLY</td>
-                        <td><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"> Green </span></td>
-                        <td>$552.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Walmart Inc.</td>
-                        <td>WMT</td>
-                        <td><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"> Red </span></td>
-                        <td>$429.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Samsung Electronics Co.,
-                            Ltd.</td>
-                        <td>005930.KS</td>
-                        <td><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"> Green </span></td>
-                        <td>$429.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Procter & Gamble Co.
-                        </td>
-                        <td>PG</td>
-                        <td><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"> Green </span></td>
-                        <td>$366.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Nestlé S.A.</td>
-                        <td>NESN.SW</td>
-                        <td><span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Yellow</span></td>
-                        <td>$338.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Roche Holding AG</td>
-                        <td>ROG.SW</td>
-                        <td><span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Yellow</span></td>
-                        <td>$317.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Chevron Corporation</td>
-                        <td>CVX</td>
-                        <td><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"> Red </span></td>
-                        <td>$310.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Merck & Co., Inc.</td>
-                        <td>MRK</td>
-                        <td><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"> Red </span></td>
-                        <td>$276.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Broadcom Inc.</td>
-                        <td>AVGO</td>
-                        <td><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"> Green </span></td>
-                        <td>$356.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Mastercard Incorporated
-                        </td>
-                        <td>MA</td>
-                        <td><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"> Green </span></td>
-                        <td>$396.00B</td>
-                        <td>$552.00B</td>
-                        <td>...</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
-
 
 
         <!-- gride -->
@@ -766,6 +773,7 @@
     <script>
         const dataTable = new simpleDatatables.DataTable("#kits");
     </script>
+    <script src="./src/js/dashboardController.js" type="module"></script>
 
 
     <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
