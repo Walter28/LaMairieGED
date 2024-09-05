@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\ActeDeNaissanceController;
@@ -34,7 +35,7 @@ Route::get('/demandes/{demande}', [DemandeController::class, 'show']);
 
 // Routes publiques Acte de naissance
 Route::get('/actes-de-naissance', [ActeDeNaissanceController::class, 'index']);
-Route::get('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'show']);
+Route::get('/actes-de-naissance/{id}', [ActeDeNaissanceController::class, 'show']);
 
 
 // Routes publiques Acte de mariage
@@ -59,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('type_documents/{id}', [TypeDocumentController::class, 'update']);
     // Route pour supprimer un document (authentifiée)
     Route::delete('type_documents/{id}', [TypeDocumentController::class, 'destroy']);
+    
 
     // Demandes privates routes
     Route::post('/demandes', [DemandeController::class, 'store']);
@@ -67,8 +69,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Acte de naissance privates routes
     Route::post('/actes-de-naissance', [ActeDeNaissanceController::class, 'store']);
-    Route::put('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'update']);
-    Route::delete('/actes-de-naissance/{acteDeNaissance}', [ActeDeNaissanceController::class, 'destroy']);
+    Route::put('/actes-de-naissance/{id}', [ActeDeNaissanceController::class, 'update']);
+    Route::delete('/actes-de-naissance/{id}', [ActeDeNaissanceController::class, 'destroy']);
 
     //Acte de mariage private routes
     Route::post('/actes-de-mariage', [ActeDeMariageController::class, 'store']);
@@ -93,6 +95,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //users routes
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Routes privées pour User
+    Route::get('/users', [UserController::class, 'index']); // Récupérer tous les utilisateurs
+    Route::get('/users/{id}', [UserController::class, 'show']); // Récupérer un utilisateur par ID
+    Route::post('/users', [UserController::class, 'store']); // Créer un nouvel utilisateur
+    Route::put('/users/{id}', [UserController::class, 'update']); // Mettre à jour un utilisateur existant
+    Route::delete('/users/{id}', [UserController::class, 'destroy']); // Supprimer un utilisateur
+
     
     
 });
