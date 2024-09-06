@@ -15,10 +15,12 @@
         }
     </script>
 
+
     <!-- simple-datatables CSS -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
     <script src="./src/js/logout.js"></script>
     <script src="./src/js/checkAccess.js"></script>
+    <script src="./src/js/save_pdf.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
 
@@ -176,606 +178,313 @@
         </div>
     </nav>
 
-    <!-- Main section of the document
-    <main class="mt-[7%] h-20 border rounded-b-xl dark:border-cardStroke dark:text-secondary conteneur">
-        naddadfa
+    
+    <!-- Main section of the document -->
+    <!-- mt-[13%] sm:mt-[11%] md:mt-[9%] lg:mt-[7%] : ce code t'aide a gerer le conteneur d'en bas le sticky header de bien se positioner -->
+    <main class="mt-[10%] sm:mt-[4%] md:mt-[4%] lg:mt-[4%]">
+    
+        <section class="h-[150px] flex justify-start dark:bg-cardFill items-center border-b border-gray-200 dark:border-gray-600 px-20">
 
-    </main> -->
-    <div
-        class="headbar mt-[13%] sm:mt-[11%] md:mt-[7%] lg:mt-[5%] border rounded-b-xl dark:border-cardStroke dark:text-secondary">
 
-        <nav class="h-[90px] bg-gray-50 border-gray-200 dark:bg-cardFill dark:text-secondary "><br>
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-                <span class="font-inter text-2xl font-light whitespace-nowrap dark:text-gray-400 ms-12">Dashboard</span>
-                </a>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="dashboard-admin.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                    </svg>
+                    Admin Dashboard
+                    </a>
+                </li>
+                <!-- <li>
+                    <div class="flex items-center">
+                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"><span class="text-primary">Zambrota kulibali</span></a>
+                    </div>
+                </li> -->
+                </ol>
+            </nav>
+  
+        </section>
+
+
+        <!-- USER PROFILES INFOS -->
+        <section class="conteneur flex flex-col gap-3 border rounded-b-lg border-t-0 border-gray-200 dark:border-gray-600 ">
+            <div class="up-header flex flex-row gap-3">
+                <p class="text-dark dark:text-secondary">TABLE DE DEMANDES</p>  
             </div>
-        </nav>
-        <nav class=" bg-gray-50 dark:bg-cardFill dark:text-secondary dark:border-cardStroke">
-            <div class="max-w-screen-xl px-4 py-3 mx-auto">
-                <div class="flex items-center">
-                    <ul class="flex flex-row mx-[190px] font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                        <li>
-                            <a href="#"
-                                class="text-gray-900 font-inter dark:text-secondary hover:border-b-2 border-primary "
-                                aria-current="page">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="text-dark font-inter dark:text-secondary hover:border-b-2 border-primary">Archive</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="text-gray-900 font-inter dark:text-secondary hover:border-b-2 border-primary">Utilisateur</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div><br>
-
-    <!-- main container -->
-
-    <div class="main-contener">
-
-        <!-- <div class="datatable searchbar w-[60%] mr-auto dark:text-secondary dark:bg-dark font-inter border-gray-200">
-
-            <div
-                class="ms-14 text text-gray-500 border dark:border-cardStroke dark:text-secondary shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700">
-                <table id="kits">
-                    <thead class="">
 
 
-                        <div class="tete dark:bg-cardFill">
-                            <tr class="dark:bg-cardFill ">
-                                <th>
-                                    <span class="flex items-center">
-                                        Name
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th data-type="date" data-format="YYYY/DD/MM">
-                                    <span class="flex items-center">
-                                        Release Date
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        NPM Downloads
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                                <th>
-                                    <span class="flex items-center">
-                                        Growth
-                                        <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                                        </svg>
-                                    </span>
-                                </th>
-                            </tr>
+
+            <div class="relative overflow-x-auto shadow-md mt-10 sm:rounded-lg">
+                <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-dark">
+                    <div>
+                        <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-dark dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                            <span class="sr-only">Action button</span>
+                            Action
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-dark dark:divide-gray-600">
+                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate account</a>
+                                </li>
+                            </ul>
+                            <div class="py-1">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete User</a>
+                            </div>
                         </div>
-
+                    </div>
+                    <label for="table-search" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                    </div>
+                </div>
+                <table id="kits" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3">Utilisateur</th>
+                            <th scope="col" class="px-6 py-3">Type de Document</th>
+                            <th scope="col" class="px-6 py-3">Statut</th>
+                            <th scope="col" class="px-6 py-3">Date de Soumission</th>
+                            <th scope="col" class="px-6 py-3">Date de Traitement</th>
+                            <th scope="col" class="px-6 py-3">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr class="hover:bg-g-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Flowbite</td>
-                            <td>2021/25/09</td>
-                            <td>269000</td>
-                            <td>49%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">React</td>
-                            <td>2013/24/05</td>
-                            <td>4500000</td>
-                            <td>24%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Angular</td>
-                            <td>2010/20/09</td>
-                            <td>2800000</td>
-                            <td>17%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Vue</td>
-                            <td>2014/12/02</td>
-                            <td>3600000</td>
-                            <td>30%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Svelte</td>
-                            <td>2016/26/11</td>
-                            <td>1200000</td>
-                            <td>57%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Ember</td>
-                            <td>2011/08/12</td>
-                            <td>500000</td>
-                            <td>44%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Backbone</td>
-                            <td>2010/13/10</td>
-                            <td>300000</td>
-                            <td>9%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">jQuery</td>
-                            <td>2006/28/01</td>
-                            <td>6000000</td>
-                            <td>5%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Bootstrap</td>
-                            <td>2011/19/08</td>
-                            <td>1800000</td>
-                            <td>12%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Foundation</td>
-                            <td>2011/23/09</td>
-                            <td>700000</td>
-                            <td>8%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Bulma</td>
-                            <td>2016/24/10</td>
-                            <td>500000</td>
-                            <td>7%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Next.js</td>
-                            <td>2016/25/10</td>
-                            <td>2300000</td>
-                            <td>45%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Nuxt.js</td>
-                            <td>2016/16/10</td>
-                            <td>900000</td>
-                            <td>50%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Meteor</td>
-                            <td>2012/17/01</td>
-                            <td>1000000</td>
-                            <td>10%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Aurelia</td>
-                            <td>2015/08/07</td>
-                            <td>200000</td>
-                            <td>20%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Inferno</td>
-                            <td>2016/27/09</td>
-                            <td>100000</td>
-                            <td>35%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Preact</td>
-                            <td>2015/16/08</td>
-                            <td>600000</td>
-                            <td>28%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Lit</td>
-                            <td>2018/28/05</td>
-                            <td>400000</td>
-                            <td>60%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Alpine.js</td>
-                            <td>2019/02/11</td>
-                            <td>300000</td>
-                            <td>70%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Stimulus</td>
-                            <td>2018/06/03</td>
-                            <td>150000</td>
-                            <td>25%</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Solid</td>
-                            <td>2021/05/07</td>
-                            <td>250000</td>
-                            <td>80%</td>
-                        </tr>
+                        <!-- Les lignes de demandes seront ajoutées ici par JavaScript -->
                     </tbody>
                 </table>
             </div>
-        </div> -->
 
-        <!-- <div class="option-container w-[60%] mx-10">
-
-
-            <div class="flex flex-col ">
-                <div class="overflow-x-auto min-h-[631px]  ">
-                    <div class="min-w-full inline-block align-middle">                   
-                        <div data-hs-datatable='{
-                            "pageLength": 5,
-                            "pagingOptions": {
-                                "pageBtnClasses": "min-w-[40px] flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700"
-                            },
-
-                            "selecting": true,
-                            "rowSelectingOptions": {
-                                "selectAllSelector": "#hs-table-search-checkbox-all"
-                            },
-
-                            "language": {
-                            "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><svg class=\"shrink-0 size-6 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-gray-600 dark:text-neutral-400\">No search results</p></div></div>"
-                            }
+            
+            
+        </section>
 
 
-                        }'>
+        <section class="conteneur flex flex-col gap-3 my-20 border rounded-lg border-gray-200 dark:border-gray-600 ">
 
-                            <div class="py-3">
-                                <div class="relative max-w-xs">
-                                    <label for="hs-table-input-search" class="sr-only ">Search</label>
-                                    <input type="text" name="hs-table-search" id="hs-table-input-search"
-                                        class="py-2 px-3 ps-9 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-cardFill dark:border-cardStroke dark:text-neutral-400 dark:placeholder-[#b8b8b8] dark:focus:ring-primary"
-                                        placeholder="Search for items" data-hs-datatable-search="">
-                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                                        <svg class="size-4 text-gray-50 dark:text-secondary"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <path d="m21 21-4.3-4.3"></path>
-                                        </svg>
-                                    </div>
-                                </div>
+            <div class="title space-y-4">
+                <p class="text-lg font-light text-dark dark:text-secondary">DEMANDE ACTE DE NAISSANCE</p>
+                <p class="text-sm font-light text-primary">Donnee Fournie</p>
+            </div>
+
+            <div class="donnee-container my-10">
+
+                <div id="detailed-pricing" class="w-full overflow-x-auto">
+                    <div class="overflow-hidden min-w-max">
+                        <div class="grid grid-cols-3 p-4 text-sm font-medium text-gray-900 bg-gray-100 border-t border-b border-gray-200 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                            <div class="flex items-center">Datas</div>
+                            <div>Values</div>
+                            <div></div>
+                        </div>
+                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'enfant : </div>
+                            <div> Wil wilonja kulibali</div>
+                            <div>
+                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                </svg>
                             </div>
-
-                            <div class="overflow-hidden min-h-[509px] border rounded-b dark:border-cardStroke">
-                                <table class="min-w-full">
-                                    <thead class="border-y border-gray-200 dark:border-neutral-700">
-                                        <tr>
-                                            <th scope="col" class="py-1 px-3 pe-0 --exclude-from-ordering">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-all" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-                                                    <label for="hs-table-search-checkbox-all"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </th>
-                                            <th scope="col"
-                                                class="py-1 group text-start font-normal focus:outline-none">
-                                                <div
-                                                    class="py-1 px-2.5 inline-flex items-center border border-transparent text-sm text-gray-500 rounded-md hover:border-gray-200 dark:text-neutral-500 dark:hover:border-neutral-700">
-                                                    Name
-                                                    <svg class="size-3.5 ms-1 -me-0.5 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path
-                                                            class="hs-datatable-ordering-asc:text-blue-600 dark:hs-datatable-ordering-asc:text-blue-500"
-                                                            d="m7 15 5 5 5-5"></path>
-                                                        <path
-                                                            class="hs-datatable-ordering-desc:text-blue-600 dark:hs-datatable-ordering-desc:text-blue-500"
-                                                            d="m7 9 5-5 5 5"></path>
-                                                    </svg>
-                                                </div>
-                                            </th>
-
-                                            <th scope="col"
-                                                class="py-1 group text-start font-normal focus:outline-none">
-                                                <div
-                                                    class="py-1 px-2.5 inline-flex items-center border border-transparent text-sm text-gray-500 rounded-md hover:border-gray-200 dark:text-neutral-500 dark:hover:border-neutral-700">
-                                                    Age
-                                                    <svg class="size-3.5 ms-1 -me-0.5 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path
-                                                            class="hs-datatable-ordering-asc:text-blue-600 dark:hs-datatable-ordering-asc:text-blue-500"
-                                                            d="m7 15 5 5 5-5"></path>
-                                                        <path
-                                                            class="hs-datatable-ordering-desc:text-blue-600 dark:hs-datatable-ordering-desc:text-blue-500"
-                                                            d="m7 9 5-5 5 5"></path>
-                                                    </svg>
-                                                </div>
-                                            </th>
-
-                                            <th scope="col"
-                                                class="py-1 group text-start font-normal focus:outline-none">
-                                                <div
-                                                    class="py-1 px-2.5 inline-flex items-center border border-transparent text-sm text-gray-500 rounded-md hover:border-gray-200 dark:text-neutral-500 dark:hover:border-neutral-700">
-                                                    Address
-                                                    <svg class="size-3.5 ms-1 -me-0.5 text-gray-400 dark:text-neutral-500"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path
-                                                            class="hs-datatable-ordering-asc:text-blue-600 dark:hs-datatable-ordering-asc:text-blue-500"
-                                                            d="m7 15 5 5 5-5"></path>
-                                                        <path
-                                                            class="hs-datatable-ordering-desc:text-blue-600 dark:hs-datatable-ordering-desc:text-blue-500"
-                                                            d="m7 9 5-5 5 5"></path>
-                                                    </svg>
-                                                </div>
-                                            </th>
-
-                                            <th scope="col"
-                                                class="py-2 px-3 text-end font-normal text-sm text-gray-500 --exclude-from-ordering dark:text-neutral-500">
-                                                Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                        <tr>
-                                            <td class="py-3 ps-3">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-1" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                                        data-hs-datatable-row-selecting-individual="">
-                                                    <label for="hs-table-search-checkbox-1"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Christina Bersh</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                45</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                4222 River Rd, Columbus</td>
-                                            <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
-                                                <button type="button"
-                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="py-3 ps-3">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-2" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                                        data-hs-datatable-row-selecting-individual="">
-                                                    <label for="hs-table-search-checkbox-2"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                David Harrison</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                27</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                2952 S Peoria Ave, Tulsa</td>
-                                            <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
-                                                <button type="button"
-                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="py-3 ps-3">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-3" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                                        data-hs-datatable-row-selecting-individual="">
-                                                    <label for="hs-table-search-checkbox-3"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Anne Richard</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                31</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                255 Dock Ln, New Tazewell</td>
-                                            <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
-                                                <button type="button"
-                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="py-3 ps-3">
-                                                <div class="flex items-center h-5">
-                                                    <input id="hs-table-search-checkbox-15" type="checkbox"
-                                                        class="border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                                                        data-hs-datatable-row-selecting-individual="">
-                                                    <label for="hs-table-search-checkbox-15"
-                                                        class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Jim Green</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                27</td>
-                                            <td
-                                                class="p-3 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                LA No. 1 Lake Park</td>
-                                            <td class="p-3 whitespace-nowrap text-end text-sm font-medium">
-                                                <button type="button"
-                                                    class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-none focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:text-blue-400">Delete</button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                        </div>
+                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                            <div class="text-gray-500 dark:text-gray-400">Date de naissance de l'enfant : </div>
+                            <div> Mecredi le 28 Fevrier 2000</div>
+                            <div>
+                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                </svg>
                             </div>
-
-                            <div class="py-1 px-4 hidden" data-hs-datatable-paging="">
-                                <nav class="flex items-center space-x-1">
-                                    <button type="button"
-                                        class="p-2.5 min-w-[40px] inline-flex justify-center items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                        data-hs-datatable-paging-prev="">
-                                        <span aria-hidden="true">«</span>
-                                        <span class="sr-only">Previous</span>
-                                    </button>
-                                    <div class="flex items-center space-x-1 [&>.active]:bg-gray-100 dark:[&>.active]:bg-neutral-700"
-                                        data-hs-datatable-paging-pages=""></div>
-                                    <button type="button"
-                                        class="p-2.5 min-w-[40px] inline-flex justify-center items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                        data-hs-datatable-paging-next="">
-                                        <span class="sr-only">Next</span>
-                                        <span aria-hidden="true">»</span>
-                                    </button>
-                                </nav>
+                        </div>
+                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                            <div class="text-gray-500 dark:text-gray-400">Lieu de naissance : </div>
+                            <div> DRODRO</div>
+                            <div>
+                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet du Pere : </div>
+                            <div> Willy JOKOMBE wilonja</div>
+                            <div>
+                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet de la mere : </div>
+                            <div> Marie Jeanne</div>
+                            <div>
+                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                </svg>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div> -->
 
-
-
-        <div
-            class="popo w-[60%] mx-10  dark:border-gray-200 min-w-[40px] flex justify-center items-center
-             text-gray-800 focus:outline-none focus:bg-gray-100 py-2.5 disabled:opacity-50 disabled:pointer-events-none
-              dark:focus:bg-neutral-700y-2 px-3 ps-9  border-gray-500 shadow-sm rounded-lg text-sm focus:z-1 dark:bg-cardFill 
-              dark:text-neutral-400 dark:placeholder-[#b8b8b8] ">
-              <table id="kits">
-                <thead>
-                    <tr>
-                        <th><span class="flex items-center">Nom complet</span></th>
-                        <th><span class="flex items-center">Demande</span></th>
-                        <th><span class="flex items-center">Label</span></th>
-                        <th><span class="flex items-center">Date de Demande</span></th>
-                        <th><span class="flex items-center">Date de Récupération</span></th>
-                        <th><span class="flex items-center">Action</span></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-
-        <!-- gride -->
-        <div class="grid-container absolute top-[42%] left-[66%] mr-10">
-
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4  ">
-                <div class="grid gap-4">
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                    </div>
-                </div>
-                <div class="grid gap-4">
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-                    </div>
-                </div>
-                <div class="grid gap-4">
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-                    </div>
-                </div>
-                <div class="grid gap-4">
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
-                    </div>
-                </div>
+            <div class="title space-y-4">
+                <p class="text-sm font-light text-primary">Documents Fournie</p>
             </div>
 
-        </div>
+            <div class="document-container">
+
+                <div class="grid grid-cols-1 gap-4 px-4 mt-8 sm:grid-cols-4 sm:px-8">
+                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
+                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
+                        </div>
+                        <div class="px-4 text-gray-700">
+                            <h3 class="text-sm tracking-wider">Certificat medical</h3>
+                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
+                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
+                        </div>
+                        <div class="px-4 text-gray-700">
+                            <h3 class="text-sm tracking-wider">Carte d'identite du pere</h3>
+                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
+                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
+                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
+                        </div>
+                        <div class="px-4 text-gray-700">
+                            <h3 class="text-sm tracking-wider">Carte d'identite de la mereh3</h3>
+                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                        </div>
+                    </div>
+                    <div class="hidden items-center bg-white border rounded-sm overflow-hidden shadow">
+                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
+                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
+                        </div>
+                        <div class="px-4 text-gray-700">
+                            <h3 class="text-sm tracking-wider">Certificat medical</h3>
+                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container px-4 mt-8 sm:px-8">
+                    <p class="font-light text-sm my-5 text-dark dark:text-secondary">Preview of <span class="text-primary">Certificat medical</span></p>
+                    <canvas id="pdf-preview" class=" border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
+                </div>
+
+            </div>
+
+        </section>
 
 
-    </div>
+        <section class="decision mx-20 my-20">
 
-    <!--  Data table -->
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Options de configuration de DataTable
-            const options = {
-                // Définissez ici vos options personnalisées
-                searchable: true,
-                fixedHeight: true,
-                paging: true,
-                perPage: 5, // Nombre d'éléments par page
-                labels: {
-                    placeholder: "Search...", // Placeholde de la barre de recherche
-                    perPage: "{select} entries per page", // Options de pagination
-                    noRows: "No entries to found", // Texte lorsqu'il n'y a pas de résultats
-                    info: "Showing {start} to {end} of {rows} entries", // Texte d'information
-                }
-            };
+            <p class="text-md text-dark dark:text-secondary font-light">VOTRE DECISION ❓</p>
 
-            // Initialiser le DataTable avec les options
-            const dataTable = new simpleDatatables.DataTable("#kits", options);
-        });
-    </script>
+            <div class="w-[30%]">
+                <button type="butto" class="space-y-2 mt-5 inline-flex items-center w-[50%] px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
+                    Accepter la demande
+                 </button>
+                 <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-light text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-dark dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Revoquer la demande
+                </button>
+            </div>
+
+        </section>
+        
+
+
+
+        
+        
+
+        
+        <footer class="bg-white dark:bg-cardFill w-full">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+                
+              <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+              <div class="sm:flex sm:items-center sm:justify-between">
+                  <span class="text-xs text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="index.html" class="hover:underline">LaMairieGED™</a>. All Rights Reserved.
+                  </span>
+                  <span class="text-xs text-gray-500 sm:text-center dark:text-gray-400">
+                    Made with ❤️ By <span class="text-dark dark:text-primary">Surface Team</span>
+                  </span>
+                  <div class="flex mt-4 sm:justify-center sm:mt-0">
+                      <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+                                <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+                            </svg>
+                          <span class="sr-only">Facebook page</span>
+                      </a>
+                      <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
+                                <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+                            </svg>
+                          <span class="sr-only">Discord community</span>
+                      </a>
+                      <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
+                            <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd"/>
+                        </svg>
+                          <span class="sr-only">Twitter page</span>
+                      </a>
+                      <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+                          </svg>
+                          <span class="sr-only">GitHub account</span>
+                      </a>
+                      <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
+                          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/>
+                        </svg>
+                          <span class="sr-only">Dribbble account</span>
+                      </a>
+                  </div>
+              </div>
+            </div>
+        </footer>
+    
+
+
+    </main>
 
 
 
 
 
     <!-- simple-datatables JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
-    <script>
-        const dataTable = new simpleDatatables.DataTable("#kits");
-    </script>
+     <!-- for generation pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
     <script src="./src/js/dashboardController.js" type="module"></script>
-
-
     <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
     <script src="./src/js/main.js"></script>
 </body>

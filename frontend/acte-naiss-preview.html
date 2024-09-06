@@ -14,25 +14,28 @@
     }
   </script>
   <script src="./src/js/authChecker.js" defer></script>
-  <script src="./src/js/acteNaissController.js" type="module" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
+  <script src="./src/js/acteNaissPreviewController.js" type="module" defer></script>
   <script src="./src/js/logout.js"></script>
   <script src="./src/js/checkAccess.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+
 </head>
 <body class="bg-white dark:bg-dark font-inter">
 
     <!-- Navbar -->
-    <nav class="bg-white dark:bg-dark fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav class="bg-white dark:bg-dark dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')] fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="./public/lamairie-ged-logo.svg" class="h-8" alt="Flowbite Logo">
-            <span class="self-center text-2xl font-light tracking-tight whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
+            <img src="./public/lamairie-ged-logo.svg" class="h-6" alt="Flowbite Logo">
+            <span class="self-center text-lg font-light tracking-tight whitespace-nowrap dark:text-white">LaMairie<span class="text-primary">GED</span></span>
         </a>
         <div class="flex flex-row md:order-2 md:space-x-0 items-end space-x-4 gap-5 justify-center rtl:space-x-reverse">
 
 
 
-            
+            <!-- notification bell -->
             <div class="notification-bell">
                 <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
                     <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20">
@@ -63,7 +66,7 @@
                         </a>
                         <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="flex-shrink-0">
-                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-2.jpg" alt="Joseph image">
+                            <img class="rounded-full w-11 h-11" id="profile_pic2" src="/docs/images/people/profile-picture-2.jpg" alt="Joseph image">
                             <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
                             <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                                 <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
@@ -131,18 +134,18 @@
             
     
 
-            <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1">
+            <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border shadow-xs focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-700 rounded-lg text-xs p-1">
                 <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                 <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
             </button>
 
 
-
+            <!-- user-dropdown -->
             <div class="user-dropdown">
                 <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white" type="button">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 me-2 rounded-full" src="data:image/png;base64,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" alt="user photo">
-                    <span class="text-light text-secondary">Bonnie Green</span>
+                    <img class="w-8 h-8 me-2 rounded-full" id="profile_pic" src="data:image/png;base64,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" alt="user photo">
+                    <span class="text-light text-secondary" id="user_name">user name</span>
                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
@@ -151,21 +154,18 @@
                 <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
                     <div class="font-medium ">Pro User</div>
-                    <div class="truncate">name@flowbite.com</div>
+                    <div class="truncate" id="user_email">user@email</div>
                     </div>
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                     <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                    </li>
+                    </li> -->
                     </ul>
                     <div class="py-2">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                        <a href="#" id="logoutButton" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="dashboard-admin.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="dashboard.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -198,8 +198,19 @@
                     <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
-                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"><span class="text-primary">Zambrota kulibali</span></a>
+                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"><span class="text-primary uppercase" id="full_name">NaN</span></a>
                     </div>
+                </li>
+                <li>
+                    <button id="download" class="text-blue-500 font-light flex flex-row gap-2 border-slate-500 shadow-sm hover:bg-blue-400 hover:opacity-90 hover:text-blue-600 rounded-lg p-2 bg-blue-200">
+                        <svg class="w-6 h-6 text-gray-800 font-light dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+                          </svg>
+                          Telechrager
+                    </button>
+                    
+                      
                 </li>
                 </ol>
             </nav>
@@ -218,11 +229,11 @@
             <div class="up-datas w-full flex gap-4">
                 <div class="user-datas w-[33%] flex flex-row items-end bg-re-700 gap-3">
                     <div class="user-profile w-[50%]">
-                        <img src="./public/cv.jpg" class="w-fit h-fit border border-primary" />
+                        <img src="./public/cv.jpg" id="profile_pic2" class="w-fit h-fit border border-primary" />
                     </div>
                     <div class="user-personnal-info w-[50%] text-dark dark:text-secondary">
-                        <p class="font-bold text-xs text-secondary">Walter Chris</p>
-                        <p class="font-medium opacity-70 text-xs text-secondary">Ne le 28 Fev 2005</p>
+                        <p class="font-bold text-xs text-secondary" id="full_name2">NaN</p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Ne le <span id="birth_date"></span> a <span id="birth_place"></span></p>
                         <p class="font-medium opacity-70 text-xs text-secondary">Habite au quartier Himbi</p>
                         <p class="font-medium opacity-70 text-xs text-secondary">Nationnalite Congolaise</p>
                     </div>
@@ -233,11 +244,11 @@
 
                     <div class="flex items-center pl-5 my-1">
                         <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
+                        <label for="default-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja payer </label>
                     </div>
                     <div class="flex items-center pl-5">
                         <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checked-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">Checked state</label>
+                        <label for="checked-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja retirer ?</label>
                     </div>
 
 
@@ -267,7 +278,7 @@
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
                             <div class="text-gray-500 dark:text-gray-400">Nom complet de l'enfant : </div>
-                            <div> Wil wilonja kulibali</div>
+                            <div id="kid_full_name" class="uppercase"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -276,7 +287,7 @@
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
                             <div class="text-gray-500 dark:text-gray-400">Date de naissance de l'enfant : </div>
-                            <div> Mecredi le 28 Fevrier 2000</div>
+                            <div id="kid_birth_date"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -285,7 +296,7 @@
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
                             <div class="text-gray-500 dark:text-gray-400">Lieu de naissance : </div>
-                            <div> DRODRO</div>
+                            <div id="kid_birth_place" class="uppercase"> Nan </div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -294,7 +305,7 @@
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
                             <div class="text-gray-500 dark:text-gray-400">Nom complet du Pere : </div>
-                            <div> Willy JOKOMBE wilonja</div>
+                            <div id="dad_full_name"> Willy JOKOMBE wilonja</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -303,7 +314,7 @@
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
                             <div class="text-gray-500 dark:text-gray-400">Nom complet de la mere : </div>
-                            <div> Marie Jeanne</div>
+                            <div id="mum_full_name"> Marie Jeanne</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -329,7 +340,7 @@
                         </div>
                         <div class="px-4 text-gray-700">
                             <h3 class="text-sm tracking-wider">Certificat medical</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <a onclick="viewPdf('certificat_medical')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -338,7 +349,7 @@
                         </div>
                         <div class="px-4 text-gray-700">
                             <h3 class="text-sm tracking-wider">Carte d'identite du pere</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <a onclick="viewPdf('certificat_id_pere')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -347,7 +358,7 @@
                         </div>
                         <div class="px-4 text-gray-700">
                             <h3 class="text-sm tracking-wider">Carte d'identite de la mereh3</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <a onclick="viewPdf('certificat_id_mere')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="hidden items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -361,9 +372,16 @@
                     </div>
                 </div>
 
+                
                 <div class="pdf-preview-container px-4 mt-8 sm:px-8">
                     <p class="font-light text-sm my-5 text-dark dark:text-secondary">Preview of <span class="text-primary">Certificat medical</span></p>
-                    <canvas id="pdf-preview" class=" border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
+
+                    <div class="controls mt-6 text-white text-xs font-light">
+                        <button id="previous" class="previous inline bg-white text-dark rounded-md">&laquo; Previous</button>
+                        <p id="pageNumber" style="display: inline;">Page 1 of 1</p>
+                        <button id="next" class="next inline bg-[#42A047] rounded-md">Next &laquo;</button>
+                    </div>
+                    <canvas id="pdf-preview" class="border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
                 </div>
 
             </div>
@@ -454,8 +472,69 @@
 
 
 
-
+<script src="./src/js/acteNaissPreviewController.js" type="module" defer></script>
 <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="./src/js/main.js"></script>
+<!-- for pdf preview  -->
+<!-- <script src="./node_modules/pdfjs-dist/build/pdf.mjs" type="module"></script> -->
+<script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from './node_modules/pdfjs-dist/build/pdf.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+// Set workerSrc
+//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+        
+</script>
+<script>
+
+    async function viewPdf(document_){
+
+        //alert(document_)
+        //
+        // The workerSrc property shall be specified.
+        //
+        //pdfjsLib.GlobalWorkerOptions.workerSrc ='./node_modules/pdfjs-dist/build/pdf.worker.mjs';
+        
+
+        
+
+        const params = new URLSearchParams(window.location.search);
+        let id =  parseInt(params.get('id'));
+        // alert(id)
+        // Vérifie si le token d'authentification existe dans localStorage
+        let demande = localStorage.getItem("acteNaissData")
+        demande = JSON.parse(demande)
+        demande =  demande.find(dmd => dmd.id === id);
+
+
+        
+        if (document_+"" == "certificat_medical"){
+            
+            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.kid_certificat_medical
+            const pdf = await pdfjsLib.getDocument(pdf_link).promise
+            const minPage = 1;
+            const maxPage = pdf._pdfInfo.numPages;
+            let currentPage = 1
+
+            // get page 1
+            await getPage(pdf, currentPage)
+
+            // Display the page number
+            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`
+            
+        }
+        if (document == "certificat_id_pere"){
+            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.dad_id_card
+        }
+        if (document == "certificat_id_mere"){
+            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.mum_id_card
+            
+        }
+    }
+    
+
+</script>
 </body>
 </html>
