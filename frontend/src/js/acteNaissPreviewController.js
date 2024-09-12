@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     ///champ prelemprir
-    document.getElementById('profile_pic').src=`http://localhost:8000/storage/${demande.user.profile_pic}`
-    document.getElementById('profile_pic2').src=`http://localhost:8000/storage/${demande.user.profile_pic}`
-    document.getElementById('full_name').innerHTML = demande.user.full_name
-    document.getElementById('full_name2').innerHTML = demande.user.full_name
-    // document.getElementById('email').innerHTML = demande.user.email
-    document.getElementById('birth_place').innerHTML = demande.user.birth_place
-    document.getElementById('birth_date').innerHTML = demande.user.birth_date
+    document.getElementById('profile_pic').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
+    document.getElementById('profile_pic2').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
+    document.getElementById('full_name').innerHTML = demande.users.full_name
+    document.getElementById('full_name2').innerHTML = demande.users.full_name
+    // document.getElementById('email').innerHTML = demande.users.email
+    document.getElementById('birth_place').innerHTML = demande.users.birth_place
+    document.getElementById('birth_date').innerHTML = demande.users.birth_date
     
-    document.getElementById('kid_full_name').innerHTML = demande.acte_naissance.kid_full_name
-    document.getElementById('dad_full_name').innerHTML = demande.acte_naissance.dad_full_name
-    document.getElementById('mum_full_name').innerHTML = demande.acte_naissance.mum_full_name
-    document.getElementById('kid_birth_place').innerHTML = demande.acte_naissance.kid_birth_place
-    document.getElementById('kid_birth_date').innerHTML = demande.acte_naissance.kid_birth_date
+    document.getElementById('kid_full_name').innerHTML = demande.actes_naissance.kid_full_name
+    document.getElementById('dad_full_name').innerHTML = demande.actes_naissance.dad_full_name
+    document.getElementById('mum_full_name').innerHTML = demande.actes_naissance.mum_full_name
+    document.getElementById('kid_birth_place').innerHTML = demande.actes_naissance.kid_birth_place
+    document.getElementById('kid_birth_date').innerHTML = demande.actes_naissance.kid_birth_date
 
     
 });
@@ -63,10 +63,10 @@ download.addEventListener('click', (e)=>{
     doc.text('Bourgmestre a.i de la Commune de Goma, Ville de Goma, atteste par la', 20, 75);
     doc.text('Présente que :', 20, 80);
 
-    doc.text('Le (la) nommé(e) : ................ '+demande.acte_naissance.kid_full_name+' .......................', 20, 90);
-    doc.text('Originaire de la chefferie de : ............ '+demande.acte_naissance.birth_place+' .................. Territoire de : .....GOMA...........', 20, 100);
-    doc.text('Fils (fille) de : .............. '+demande.acte_naissance.dad_full_name+' ................ et de ............'+demande.acte_naissance.mum_full_name+'.............', 20, 110);
-    doc.text('Est Né(e) à ..................... '+demande.acte_naissance.birth_place+' .........................le .......'+demande.acte_naissance.kid_birth_date+'.........', 20, 120);
+    doc.text('Le (la) nommé(e) : ................ '+demande.actes_naissance.kid_full_name+' .......................', 20, 90);
+    doc.text('Originaire de la chefferie de : ............ '+demande.actes_naissance.kid_birth_place+' .................. Territoire de : .....GOMA...........', 20, 100);
+    doc.text('Fils (fille) de : .............. '+demande.actes_naissance.dad_full_name+' ................ et de ............'+demande.actes_naissance.mum_full_name+'.............', 20, 110);
+    doc.text('Est Né(e) à ..................... '+demande.actes_naissance.kid_birth_place+' .........................le .......'+demande.actes_naissance.kid_birth_date+'.........', 20, 120);
 
     // Ajout de la date et de la signature
     doc.text('Fait à Goma, le ....../....../2018', 140, 140);

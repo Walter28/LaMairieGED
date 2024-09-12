@@ -16,6 +16,8 @@ async function getDemande() {
 
         let demandes = await response.json();
 
+        // console.log("demandes 1 : ", demandes)
+
         if (response.ok) {
             // 2. Créer des listes de promesses pour récupérer les utilisateurs, les types de documents et les actes de naissance
             const userPromises = demandes.map(demande => 
@@ -39,7 +41,7 @@ async function getDemande() {
             );
 
             const acteNaissancePromises = demandes.map(demande =>
-                fetch(`http://localhost:8000/api/actes-de-naissance/${demande.id}`, {
+                fetch(`http://localhost:8000/api/actes-de-naissance/demande/${demande.id}`, {
                     method: 'get',
                     headers: {
                         'Accept': 'application/json',
@@ -48,40 +50,66 @@ async function getDemande() {
                 }).then(res => res.json())
             );
 
+
             // 3. Attendre que toutes les requêtes pour les utilisateurs, types de documents et actes de naissance soient terminées
             const users = await Promise.all(userPromises);
             const typeDocuments = await Promise.all(typeDocumentPromises);
             const actesNaissance = await Promise.all(acteNaissancePromises);
+            // 1. Normaliser les résultats des actes de naissance
+            const flattenedActesNaissance = actesNaissance.flat();  // On aplatit les sous-tableaux
 
-            // 4. Convertir les listes en objets pour une recherche plus facile
+            // console.log("demande : ",demandes.flat())
+            // console.log("users : ", users)
+            // console.log("usersFlatten : ", users.flat())
+
+            
+
+            // 4. Convertir les listes en objets pour une recherche plus facile, mais avec des tableaux pour conserver tous les éléments
             const userMap = users.reduce((acc, user) => {
-                acc[user.id] = user;
+                if (!acc[user.id]) {
+                    acc[user.id] = [];
+                }
+                acc[user.id].push(user);
                 return acc;
             }, {});
 
             const typeDocumentMap = typeDocuments.reduce((acc, typeDocument) => {
-                acc[typeDocument.id] = typeDocument;
+                if (!acc[typeDocument.id]) {
+                    acc[typeDocument.id] = [];
+                }
+                acc[typeDocument.id].push(typeDocument);
                 return acc;
             }, {});
 
-            const acteNaissanceMap = actesNaissance.reduce((acc, acte) => {
-                acc[acte.demande_id] = acte;
+            // Adapter le mappage des actes de naissance
+            const acteNaissanceMap = flattenedActesNaissance.reduce((acc, acteNaissance) => {
+                if (!acc[acteNaissance.id]) {
+                    acc[acteNaissance.id] = [];
+                }
+                acc[acteNaissance.id].push(acteNaissance); // Ajouter chaque acte de naissance au tableau
                 return acc;
             }, {});
+
+
+            // console.log("acteNaissanceMap : ",acteNaissanceMap)
+            // console.log("flattenedActesNaissance : ", flattenedActesNaissance)
 
             // 5. Combiner les données des demandes avec les détails des utilisateurs, types de documents et actes de naissance
-            let demandesWithDetails = demandes.map(demande => ({
+            // 4. Utiliser les index de la promesse pour assigner les bons utilisateurs et actes à chaque demande
+            let demandesWithDetails = demandes.map((demande, index) => ({
                 ...demande,
-                user: userMap[demande.user_id] || null,
-                type_document: typeDocumentMap[demande.type_document_id] || null,
-                acte_naissance: acteNaissanceMap[demande.id] || null
+                users: users[index] || null, // Un seul utilisateur correspondant à la demande
+                type_documents: typeDocuments[index] || null, // Un seul type de document correspondant
+                actes_naissance: flattenedActesNaissance[index] || [] // Les actes de naissance associés à la demande
             }));
+            
 
             // demandesWithDetails = JSON.stringify(demandesWithDetails)
             // Stocker les informations de l'utilisateur actuel
             localStorage.setItem('acteNaissData', JSON.stringify(demandesWithDetails));
-            console.log(demandesWithDetails);
-
+            demandesWithDetails = Object.values(demandesWithDetails);
+            
+            console.log("deamnde ", demandesWithDetails);
 
             // Maintenant, on va remplir le tableau HTML avec les données
             const tableBody = document.querySelector('#kits tbody');
@@ -90,7 +118,8 @@ async function getDemande() {
             demandesWithDetails.forEach(demande => {
                 const row = document.createElement('tr');
                 row.classList.add('bg-white', 'border-b', 'dark:bg-cardFill', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
-
+                // console.log(Object.values(demande.users))
+                console.log(demande.users)
                 row.innerHTML = `
                     <td class="w-4 p-4">
                         <div class="flex items-center">
@@ -98,14 +127,14 @@ async function getDemande() {
                         </div>
                     </td>
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full" src="http://localhost:8000/storage/${demande.user.profile_pic}" alt="Profile image">
+                        <img class="w-10 h-10 rounded-full" src="http://localhost:8000/storage/${demande.users.profile_pic}" alt="Profile image">
                         <div class="ps-3">
-                            <div class="text-base font-semibold">${demande.user ? demande.user.full_name : 'N/A'}</div>
-                            <div class="font-normal text-gray-500">${demande.user ? demande.user.email : 'N/A'}</div>
+                            <div class="text-base font-semibold">${demande.users ? demande.users.full_name : 'N/A'}</div>
+                            <div class="font-normal text-gray-500">${demande.users ? demande.users.email : 'N/A'}</div>
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        ${demande.type_document ? demande.type_document.nom : 'N/A'}
+                        ${demande.type_documents ? demande.type_documents.nom : 'N/A'}
                     </td>
                     <td class="px-6 py-4">
                         <span class="bg-${demande.status === 'accepted' ? 'green' : 'red'}-100 text-${demande.status === 'accepted' ? 'green' : 'red'}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-${demande.status === 'accepted' ? 'green' : 'red'}-900 dark:text-${demande.status === 'accepted' ? 'green' : 'red'}-300">${demande.status}</span>

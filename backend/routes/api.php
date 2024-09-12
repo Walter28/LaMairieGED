@@ -37,6 +37,9 @@ Route::get('/demandes/{demande}', [DemandeController::class, 'show']);
 Route::get('/actes-de-naissance', [ActeDeNaissanceController::class, 'index']);
 Route::get('/actes-de-naissance/{id}', [ActeDeNaissanceController::class, 'show']);
 
+// Route pour récupérer les actes de naissance par demande_id
+Route::get('actes-de-naissance/demande/{demande_id}', [ActeDeNaissanceController::class, 'getByDemandeId']);
+
 
 // Routes publiques Acte de mariage
 Route::get('/actes-de-mariage', [ActeDeMariageController::class, 'index']);
