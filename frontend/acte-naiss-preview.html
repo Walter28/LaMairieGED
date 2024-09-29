@@ -157,7 +157,7 @@
                     </div>
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin Dashboard</a>
                     </li>
                     <!-- <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
@@ -228,7 +228,7 @@
             <div class="up-datas w-full flex gap-4">
                 <div class="user-datas w-[33%] flex flex-row items-end bg-re-700 gap-3">
                     <div class="user-profile w-[50%]">
-                        <img src="./public/cv.jpg" id="profile_pic2" class="w-fit h-fit border border-primary" />
+                        <img src="./public/cv.jpg" id="profile_pic_user" class="w-fit h-fit border border-primary" />
                     </div>
                     <div class="user-personnal-info w-[50%] text-dark dark:text-secondary">
                         <p class="font-bold text-xs text-secondary" id="full_name2">NaN</p>
@@ -246,7 +246,7 @@
                         <label for="default-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja payer </label>
                     </div>
                     <div class="flex items-center pl-5">
-                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checked-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja retirer ?</label>
                     </div>
 
@@ -356,7 +356,7 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d'identite de la mereh3</h3>
+                            <h3 class="text-sm tracking-wider">Carte d'identite de la mere</h3>
                             <a onclick="viewPdf('certificat_id_mere')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
@@ -373,14 +373,14 @@
 
                 
                 <div class="pdf-preview-container px-4 mt-8 sm:px-8">
-                    <p class="font-light text-sm my-5 text-dark dark:text-secondary">Preview of <span class="text-primary">Certificat medical</span></p>
+                    <p class="font-light text-sm my-5 text-dark dark:text-secondary">L'affichage de - <span class="text-primary" id="doc"></span></p>
 
                     <div class="controls mt-6 text-white text-xs font-light">
                         <button id="previous" class="previous inline bg-white text-dark rounded-md">&laquo; Previous</button>
-                        <p id="pageNumber" style="display: inline;">Page 1 of 1</p>
+                        <p id="pageNumber" style="display: inline;">Page 1 sur 1</p>
                         <button id="next" class="next inline bg-[#42A047] rounded-md">Next &laquo;</button>
                     </div>
-                    <canvas id="pdf-preview" class="border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
+                    <canvas id="canvas" class="border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
                 </div>
 
             </div>
@@ -471,13 +471,14 @@
 
 
 
-<script src="./src/js/acteNaissPreviewController.js" type="module" defer></script>
+<script src="./src/js/acteNaissPreviewController.js" type="module"></script>
 <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="./src/js/main.js"></script>
 <script src="./src/js/logout.js"></script>
+
 <!-- for pdf preview  -->
 <!-- <script src="./node_modules/pdfjs-dist/build/pdf.mjs" type="module"></script> -->
-<script type="module">
+<!-- <script type="module">
 
     // Import PDF.js library
     import * as pdfjsLib from './node_modules/pdfjs-dist/build/pdf.mjs';
@@ -486,19 +487,22 @@
 // Set workerSrc
 //pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
         
+</script> -->
+
+<script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs';
+// Set workerSrc
+//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+        
 </script>
+
 <script>
 
-    async function viewPdf(document_){
-
-        //alert(document_)
-        //
-        // The workerSrc property shall be specified.
-        //
-        //pdfjsLib.GlobalWorkerOptions.workerSrc ='./node_modules/pdfjs-dist/build/pdf.worker.mjs';
-        
-
-        
+    async function viewPdf(document_){        
 
         const params = new URLSearchParams(window.location.search);
         let id =  parseInt(params.get('id'));
@@ -508,33 +512,135 @@
         demande = JSON.parse(demande)
         demande =  demande.find(dmd => dmd.id === id);
 
+        console.log("demande ",demande)
+        console.log("http://localhost:8000/file/"+demande.actes_naissance.kid_certificat_medical)
 
-        
+
         if (document_+"" == "certificat_medical"){
-            
-            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.kid_certificat_medical
-            const pdf = await pdfjsLib.getDocument(pdf_link).promise
-            const minPage = 1;
-            const maxPage = pdf._pdfInfo.numPages;
-            let currentPage = 1
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.kid_certificat_medical
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Certificat Medical de l'Enfant")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
+        }
 
-            // get page 1
-            await getPage(pdf, currentPage)
 
-            // Display the page number
-            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`
-            
+        if (document_+"" == "certificat_id_pere") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.dad_id_card
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Carte d'identite du Père")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
         }
-        if (document == "certificat_id_pere"){
-            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.dad_id_card
+
+
+        if (document_+"" == "certificat_id_mere") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.mum_id_card
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Carte d'identite de la Mère")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
         }
-        if (document == "certificat_id_mere"){
-            const pdf_link = "http://localhost:8000/storage/"+demande.acte_naissance.mum_id_card
-            
-        }
+
     }
-    
 
 </script>
+
+<!-- pdf js from vendor : local  -->
+<!-- <script src="C:/Users/Virunga-System/Documents/Projects/Memoire/LaMairieGED/frontend/src/vendor/js/PDF.Js/build/pdf.mjs"></script> -->
+<!-- pdfjs worker from vendor -->
+<!-- <script src="C:/Users/Virunga-System/Documents/Projects/Memoire/LaMairieGED/frontend/src/vendor/js/PDF.Js/build/pdf.worker.mjs"></script> -->
+
+<!-- this script is used now to preview the PDF and manage it  -->
+<script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs';
+
+    (async function () {
+
+        let pdf_to_preview = localStorage.getItem('pdf_to_preview') ?? ''
+        let name_of_doc = localStorage.getItem("name_of_doc") ?? '-'
+        document.getElementById("doc").innerHTML = name_of_doc
+        //alert(pdf_to_preview)
+        
+
+        let pdf_link = "compressed.tracemonkey-pldi-09.pdf"
+        const doc = await pdfjsLib.getDocument(pdf_to_preview).promise
+
+        const minPage = 1;
+        const maxPage = doc._pdfInfo.numPages;
+        let currentPage = 1
+        console.log("num pager : ", maxPage)
+
+        //get page 1
+        await getPage(doc, currentPage)
+
+        // Display the page number
+        document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+
+        // The previous button click event
+        document.getElementById("previous").addEventListener("click", async () => {
+
+            if(currentPage > minPage) {
+                // Get the previous page
+                await getPage(doc, currentPage--)
+                // Display the page number
+                document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+            }
+
+        })
+
+        // The next button click event
+        document.getElementById("next").addEventListener("click", async () => {
+
+            
+
+            if(currentPage < maxPage) {
+                // Get the previous page
+                await getPage(doc, currentPage++)
+                // Display the page number
+                document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+            }
+
+        })
+
+    })()
+
+    async function getPage(doc, pageNumber){
+
+        if (pageNumber>= 1 && pageNumber <= doc._pdfInfo.numPages){
+
+            // Fetch the page
+            const page = await doc.getPage(pageNumber)
+
+            // Set the viewport
+            const viewport = page.getViewport({ scale: 1.5})
+
+            // Set the canva dimensions to the PDF page dimensions
+            const canvas = document.getElementById("canvas")
+            const context = canvas.getContext("2d")
+            canvas.height = viewport.height
+            canvas.width = viewport.width
+            
+            // Render the PDF t=into the canvas context
+            return await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise
+
+        } else {
+            console.log("Please specify a valid pdf number")
+        }
+
+    }
+
+</script>
+
 </body>
 </html>

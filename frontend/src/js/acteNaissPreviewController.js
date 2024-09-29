@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     ///champ prelemprir
-    document.getElementById('profile_pic').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
-    document.getElementById('profile_pic2').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
+    //document.getElementById('profile_pic').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
+    document.getElementById('profile_pic_user').src=`http://localhost:8000/storage/${demande.users.profile_pic}`
     document.getElementById('full_name').innerHTML = demande.users.full_name
     document.getElementById('full_name2').innerHTML = demande.users.full_name
     // document.getElementById('email').innerHTML = demande.users.email
