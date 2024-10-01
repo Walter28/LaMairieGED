@@ -42,4 +42,9 @@ class Demande extends Model
     {
         return $this->hasOne(ActeDeMariage::class);
     }
+
+    public function certificatDeDece()
+    {
+        return $this->hasOne(CertificatDeDece::class);
+    }
 }
