@@ -10,8 +10,12 @@ use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\ActeDeNaissanceController;
 use App\Http\Controllers\ActeDeMariageController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CertificatDeDeceController;
 use App\Http\Controllers\CertificatDeResidenceController;
+use App\Http\Controllers\CarteIdentiteNationaleController;
+use App\Http\Controllers\CertificatDeCelibatController;
+use App\Http\Controllers\PermisDeConstruireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +61,23 @@ Route::get('/certificats-de-dece/demande/{demande_id}', [CertificatDeDeceControl
 // Routes publiques Certificat de résidence
 Route::get('/certificats-de-residence', [CertificatDeResidenceController::class, 'index']); // Récupérer tous les certificats de résidence
 Route::get('/certificats-de-residence/{id}', [CertificatDeResidenceController::class, 'show']); // Récupérer un certificat de résidence par ID
-Route::get('/certificats-de-residence/demande/{demande_id}', [CertificatDeResidenceController::class, 'getByDemandeId']); // Récupérer par demande_id
+Route::get('/certificats-de-residence/demande/{demande_id}', [CertificatDeResidenceController::class, 'getByDemandeId']); // Récupé!!rer par demande_id
+
+// Routes publiques pour Carte d'Identité Nationale
+Route::get('/cartes-identite-nationale', [CarteIdentiteNationaleController::class, 'index']); // Récupérer toutes les cartes d'identité nationale
+Route::get('/cartes-identite-nationale/{id}', [CarteIdentiteNationaleController::class, 'show']); // Récupérer une carte d'identité nationale par ID
+Route::get('/cartes-identite-nationale/demande/{demande_id}', [CarteIdentiteNationaleController::class, 'getByDemandeId']); // Récupérer par demande_id
+
+// Routes publiques Certificat de Célibat
+Route::get('/certificats-de-celibat', [CertificatDeCelibatController::class, 'index']); // Récupérer tous les certificats de célibat
+Route::get('/certificats-de-celibat/{id}', [CertificatDeCelibatController::class, 'show']); // Récupérer un certificat de célibat par ID
+Route::get('/certificats-de-celibat/demande/{demande_id}', [CertificatDeCelibatController::class, 'getByDemandeId']); // Récupérer par demande_id
+
+// Routes publiques pour Permis de Construire
+Route::get('/permis-de-construire', [PermisDeConstruireController::class, 'index']); // Récupérer tous les permis de construire
+Route::get('/permis-de-construire/{id}', [PermisDeConstruireController::class, 'show']); // Récupérer un permis de construire par ID
+Route::get('/permis-de-construire/demande/{demande_id}', [PermisDeConstruireController::class, 'getByDemandeId']); // Récupérer par demande_id
+
 
 
 
@@ -104,6 +124,22 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/certificats-de-residence', [CertificatDeResidenceController::class, 'store']); // Créer un nouveau certificat de résidence
     Route::put('/certificats-de-residence/{id}', [CertificatDeResidenceController::class, 'update']); // Mettre à jour un certificat de résidence existant
     Route::delete('/certificats-de-residence/{id}', [CertificatDeResidenceController::class, 'destroy']); // Supprimer un certificat de résidence
+
+    // Routes privées pour Carte d'Identité Nationale
+    Route::post('/cartes-identite-nationale', [CarteIdentiteNationaleController::class, 'store']); // Créer une nouvelle carte d'identité nationale
+    Route::put('/cartes-identite-nationale/{id}', [CarteIdentiteNationaleController::class, 'update']); // Mettre à jour une carte d'identité nationale existante
+    Route::delete('/cartes-identite-nationale/{id}', [CarteIdentiteNationaleController::class, 'destroy']); // Supprimer une carte d'identité nationale
+
+    // Routes privées Certificat de Célibat
+    Route::post('/certificats-de-celibat', [CertificatDeCelibatController::class, 'store']); // Créer un nouveau certificat de célibat
+    Route::put('/certificats-de-celibat/{id}', [CertificatDeCelibatController::class, 'update']); // Mettre à jour un certificat de célibat existant
+    Route::delete('/certificats-de-celibat/{id}', [CertificatDeCelibatController::class, 'destroy']); // Supprimer un certificat de célibat
+
+    // Routes privées pour Permis de Construire
+    Route::post('/permis-de-construire', [PermisDeConstruireController::class, 'store']); // Créer un nouveau permis de construire
+    Route::put('/permis-de-construire/{id}', [PermisDeConstruireController::class, 'update']); // Mettre à jour un permis de construire existant
+    Route::delete('/permis-de-construire/{id}', [PermisDeConstruireController::class, 'destroy']); // Supprimer un permis de construire
+
 
 
     //Will keep all notifications privates coz notifications need a user to be connected first

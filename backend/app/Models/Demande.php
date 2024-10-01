@@ -47,4 +47,21 @@ class Demande extends Model
     {
         return $this->hasOne(CertificatDeDece::class);
     }
+
+    public function certificatDeResidence(){
+        return $this->hasOne(CertificatDeResidence::class);
+    }
+
+    public function carteIdentiteNationale(){
+        return $this->hasOne(CarteIdentiteNationale::class);
+    }
+
+    public function certificatDeCelibat(){
+        return $this->hasOne(CertificatDeCelibat::class);
+    }
+
+    public function permisDeConduire(){
+        return $this->hasOne(CertificatDeCelibat::class);
+    }
+
 }

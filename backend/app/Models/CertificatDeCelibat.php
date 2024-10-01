@@ -5,21 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarteIdentiteNationale extends Model
+class CertificatDeCelibat extends Model
 {
     use HasFactory;
 
+    protected $table = 'certificat_de_celibat';
+
     protected $fillable = [
-        'nom_complet_citoyen',
-        'date_de_naissance',
-        'lieu_de_naissance',
-        'adresse_actuelle',
-        'photo_identite',
+        'nom_complet_celibataire',
+        'date_naissance',
+        'lieu_naissance',
         'preuve_identite',
-        'empreintes_digitales',
-        'demande_id', // clé étrangère
+        'acte_naissance',
+        'declaration_honneur',
+        'demande_id'
     ];
 
+    // Relation avec la table 'demande'
     public function demande()
     {
         return $this->belongsTo(Demande::class);

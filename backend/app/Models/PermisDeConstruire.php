@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarteIdentiteNationale extends Model
+class PermisDeConstruire extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nom_complet_citoyen',
-        'date_de_naissance',
-        'lieu_de_naissance',
-        'adresse_actuelle',
-        'photo_identite',
+        'nom_demandeur',
+        'adresse_site_construction',
+        'plans_construction',
+        'permis_urbanisme',
+        'preuve_propriete_terrain',
         'preuve_identite',
-        'empreintes_digitales',
-        'demande_id', // clé étrangère
+        'demande_id',
     ];
 
+    // Relation avec le modèle Demande
     public function demande()
     {
         return $this->belongsTo(Demande::class);
