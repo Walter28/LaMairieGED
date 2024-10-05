@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let id =  parseInt(params.get('id'));
     // alert(id)
     // Vérifie si le token d'authentification existe dans localStorage
-    let demande = localStorage.getItem("acteNaissData")
+    let demande = localStorage.getItem("actesData")
     demande = JSON.parse(demande)
     demande =  demande.find(dmd => dmd.id === id);
     console.log(demande)
@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.getElementById('email').innerHTML = demande.users.email
     document.getElementById('birth_place').innerHTML = demande.users.birth_place
     document.getElementById('birth_date').innerHTML = demande.users.birth_date
+    document.getElementById('nationalite').innerHTML = demande.users.nationality
+    document.getElementById('address').innerHTML = demande.users.address
     
     document.getElementById('kid_full_name').innerHTML = demande.actes_naissance.kid_full_name
     document.getElementById('dad_full_name').innerHTML = demande.actes_naissance.dad_full_name
@@ -36,7 +38,7 @@ download.addEventListener('click', (e)=>{
     let id =  parseInt(params.get('id'));
     // alert(id)
     // Vérifie si le token d'authentification existe dans localStorage
-    let demande = localStorage.getItem("acteNaissData")
+    let demande = localStorage.getItem("actesData")
     demande = JSON.parse(demande)
     demande =  demande.find(dmd => dmd.id === id);
     console.log(demande)

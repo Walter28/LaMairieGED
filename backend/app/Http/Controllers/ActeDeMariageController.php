@@ -37,6 +37,7 @@ class ActeDeMariageController extends Controller
             'marry_id_card' => 'required|file|mimes:pdf|max:2048',
             'marry_certificat_naiss' => 'required|file|mimes:pdf|max:2048',
             'wedding_place' => 'required|string|max:255',
+            'wedding_date' => 'required|date',
             'couple_leaving_proof' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
@@ -107,6 +108,7 @@ class ActeDeMariageController extends Controller
             'marry_id_card' => 'sometimes|file|mimes:pdf|max:2048',
             'marry_certificat_naiss' => 'sometimes|file|mimes:pdf|max:2048',
             'wedding_place' => 'sometimes|string|max:255',
+            'wedding_date' => 'required|date',
             'couple_leaving_proof' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 

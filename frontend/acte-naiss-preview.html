@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My HTML Project with Tailwind CSS and Flowbite</title>
   <link href="/src/styles.css" rel="stylesheet">
+
+  <script src="./src/js/saveUrl.js"></script>
+
   <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -12,7 +15,12 @@
     } else {
         document.documentElement.classList.remove('dark')
     }
+
+
+    
+
   </script>
+
   <script src="./src/js/authChecker.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
   <script src="./src/js/acteNaissPreviewController.js" type="module" defer></script>
@@ -201,8 +209,8 @@
                     </div>
                 </li>
                 <li>
-                    <button id="download" class="text-blue-500 font-light flex flex-row gap-2 border-slate-500 shadow-sm hover:bg-blue-400 hover:opacity-90 hover:text-blue-600 rounded-lg p-2 bg-blue-200">
-                        <svg class="w-6 h-6 text-gray-800 font-light dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <button id="download" class="text-green-500 font-light flex flex-row gap-2 border-slate-500 shadow-sm hover:bg-green-400 hover:opacity-90 hover:text-green-600 rounded-lg p-2 bg-green-200">
+                        <svg class="w-6 h-6 text-gray-800 font-light dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
                             <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
                           </svg>
@@ -233,8 +241,8 @@
                     <div class="user-personnal-info w-[50%] text-dark dark:text-secondary">
                         <p class="font-bold text-xs text-secondary" id="full_name2">NaN</p>
                         <p class="font-medium opacity-70 text-xs text-secondary">Ne le <span id="birth_date"></span> a <span id="birth_place"></span></p>
-                        <p class="font-medium opacity-70 text-xs text-secondary">Habite au quartier Himbi</p>
-                        <p class="font-medium opacity-70 text-xs text-secondary">Nationnalite Congolaise</p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Habite a/au <span id="address"></span></p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Nationnalite <span id="nationalite"></span></p>
                     </div>
                 </div>
                 <div class="w-[33%] bg-gree-600 p-10">
@@ -375,10 +383,18 @@
                 <div class="pdf-preview-container px-4 mt-8 sm:px-8">
                     <p class="font-light text-sm my-5 text-dark dark:text-secondary">L'affichage de - <span class="text-primary" id="doc"></span></p>
 
-                    <div class="controls mt-6 text-white text-xs font-light">
-                        <button id="previous" class="previous inline bg-white text-dark rounded-md">&laquo; Previous</button>
+                    <div class="controls mt-6 text-white text-xs font-light flex flex-row gap-2 align-center pb-3">
+                        <button id="previous" class="previous bg-[#42A047] rounded-lg">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 16-4-4 4-4m-6 8-4-4 4-4"/>
+                            </svg> 
+                        </button>
                         <p id="pageNumber" style="display: inline;">Page 1 sur 1</p>
-                        <button id="next" class="next inline bg-[#42A047] rounded-md">Next &laquo;</button>
+                        <button id="next" class="next bg-[#42A047] rounded-lg">
+                          <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 16 4-4-4-4m6 8 4-4-4-4"/>
+                          </svg>
+                        </button>
                     </div>
                     <canvas id="canvas" class="border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
                 </div>
@@ -508,7 +524,7 @@
         let id =  parseInt(params.get('id'));
         // alert(id)
         // Vérifie si le token d'authentification existe dans localStorage
-        let demande = localStorage.getItem("acteNaissData")
+        let demande = localStorage.getItem("actesData")
         demande = JSON.parse(demande)
         demande =  demande.find(dmd => dmd.id === id);
 
