@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My HTML Project with Tailwind CSS and Flowbite</title>
   <link href="/src/styles.css" rel="stylesheet">
+
+  <script src="./src/js/saveUrl.js"></script>
+
   <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -15,7 +18,7 @@
   </script>
   <script src="./src/js/authChecker.js" defer></script>
   <script src="./src/js/acteNaissController.js" type="module" defer></script>
-  <!-- <script src="./src/js/logout.js"></script> -->
+  <script src="./src/js/logout.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </head>
 <body class="bg-white dark:bg-dark font-inter">
@@ -212,32 +215,32 @@
                 </li>
                 <li class="mb-4 ms-9">
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                    <a href="#">
+                    <a href="certificat-de-dece">
                         <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Décès</time>
                     </a>
                 </li>
                 <li class="mb-4 ms-9">
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                    <a href="#">
-                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Décès</time>
+                    <a href="certificat-de-residence">
+                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Résidence</time>
                     </a>
                 </li>
                 <li class="mb-4 ms-9">
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                    <a href="#">
-                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Décès</time>
+                    <a href="carte-identite-nationale">
+                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Carte d'Identité Nationale</time>
                     </a>
                 </li>
                 <li class="mb-4 ms-9">
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                    <a href="#">
-                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Décès</time>
+                    <a href="certificat-de-celibat">
+                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Célibat</time>
                     </a>
                 </li>
                 <li class="mb-4 ms-9">
                     <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-                    <a href="#">
-                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Certificat de Décès</time>
+                    <a href="permis-de-construire">
+                        <time class="mb-1 text-sm font-bold leading-none text-gray-400 dark:text-gray-500">Permis de Construire</time>
                     </a>
                 </li>
             </ol>                     
