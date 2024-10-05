@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'storage/*'],  // Add the paths where your API and files are served
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*'], // Allow your frontend
 
     'allowed_origins_patterns' => [],
 
@@ -32,3 +32,8 @@ return [
     'supports_credentials' => false,
 
 ];
+
+
+// config/cors.php
+dd(config('cors')); // Affiche la configuration CORS en cours pour vérifier qu'elle est correcte
+

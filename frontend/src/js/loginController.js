@@ -31,7 +31,11 @@ sigInForm.addEventListener('submit', async e => {
 
                 // Redirection ou autre action après l'enregistrement
                 console.log('Utilisateur enregistré avec succès.');
-                window.location.href = '/acte-de-naissance'; // Remplacez par l'URL de votre tableau de bord
+                if (data.user.role == 'citoyen'){
+                    window.location.href = '/acte-de-naissance'; // Remplacez par l'URL de votre tableau de bord
+                } else {
+                    window.location.href = '/dashboard';
+                }
             } else {
                 console.error('Il ya eu une erreur lors de l\'enregistrement de l\'utilisateur');
 

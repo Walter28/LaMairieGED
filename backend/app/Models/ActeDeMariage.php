@@ -18,6 +18,7 @@ class ActeDeMariage extends Model
         'marry_id_card',
         'marry_certificat_naiss',
         'wedding_place',
+        'wedding_date',
         'couple_leaving_proof',
     ];
 
