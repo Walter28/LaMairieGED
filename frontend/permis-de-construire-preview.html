@@ -280,8 +280,8 @@
                             <div></div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'epoux : </div>
-                            <div id="husband_full_name" class="uppercase"> NaN</div>
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet du demandeur : </div>
+                            <div id="nom_demandeur" class="uppercase"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -289,26 +289,8 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'epouse : </div>
-                            <div id="marry_full_name"> NaN</div>
-                            <div>
-                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Lieu de mariage : </div>
-                            <div id="wedding_place" class="uppercase"> Nan </div>
-                            <div>
-                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Date de mariage : </div>
-                            <div id="wedding_date"> Nan</div>
+                            <div class="text-gray-500 dark:text-gray-400">Adresse site de cosntruction : </div>
+                            <div id="adresse_site_construction"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -333,8 +315,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d’identite ou passport de l’epou</h3>
-                            <a onclick="viewPdf('carte_id_epou')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Plans de construction</h3>
+                            <a onclick="viewPdf('plans_construction')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -342,8 +324,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d’identite ou passport de l’epouse</h3>
-                            <a onclick="viewPdf('carte_id_epouse')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Permis d'urbanisme</h3>
+                            <a onclick="viewPdf('permis_urbanisme')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -351,8 +333,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat de naissance de l'epou</h3>
-                            <a onclick="viewPdf('certificat_naiss_epou')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Preuve propriete terrain</h3>
+                            <a onclick="viewPdf('preuve_propriete_terrain')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -360,17 +342,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat de naissance de l'epouse</h3>
-                            <a onclick="viewPdf('certificat_naiss_epouse')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Preuves de residences des epous</h3>
-                            <a onclick="viewPdf('preuves_res_epoux')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Preuve d'identite</h3>
+                            <a onclick="viewPdf('preuve_identite')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
 
@@ -529,50 +502,40 @@
         //console.log("http://localhost:8000/file/"+demande.actes_naissance.kid_certificat_medical)
 
 
-        if (document_+"" == "carte_id_epou"){
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.husband_id_card
+        if (document_+"" == "plans_construction"){
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.plans_construction
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte d'identite de l'epou")
+            localStorage.setItem("name_of_doc", "Plan de construction")
             // await preview()
             //reload the page to view the change
             location.reload()
         }
 
 
-        if (document_+"" == "carte_id_epouse") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.marry_id_card
+        if (document_+"" == "permis_urbanisme") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.permis_urbanisme
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte d'identite de l'epouse")
+            localStorage.setItem("name_of_doc", "Permis d'urbanisme")
             // await preview()
             //reload the page to view the change
             location.reload()
         }
 
 
-        if (document_+"" == "certificat_naiss_epou") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.husband_certificat_naiss
+        if (document_+"" == "preuve_propriete_terrain") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.preuve_propriete_terrain
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte de naissance de l'epou")
+            localStorage.setItem("name_of_doc", "Preuve propriete terrain")
             // await preview()
             //reload the page to view the change
             location.reload()
         }
 
 
-        if (document_+"" == "certificat_naiss_epouse") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.marry_certificat_naiss
+        if (document_+"" == "preuve_identite") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.preuve_identite
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte de naissance de l'epouse")
-            // await preview()
-            //reload the page to view the change
-            location.reload()
-        }
-
-
-        if (document_+"" == "preuves_res_epoux") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.couple_leaving_proof
-            localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Preuve de residences des epoux")
+            localStorage.setItem("name_of_doc", "Preuve d'identite")
             // await preview()
             //reload the page to view the change
             location.reload()

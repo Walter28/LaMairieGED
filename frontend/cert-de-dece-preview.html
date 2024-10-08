@@ -19,7 +19,7 @@
 
   <script src="./src/js/authChecker.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
-  <script src="./src/js/acteMariagePreviewController.js" type="module" defer></script>
+  <script src="./src/js/certDecePreviewController.js" type="module" defer></script>
   <script src="./src/js/checkAccess.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
@@ -280,8 +280,8 @@
                             <div></div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'epoux : </div>
-                            <div id="husband_full_name" class="uppercase"> NaN</div>
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet du defunt : </div>
+                            <div id="nom_complet_defunt" class="uppercase"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -289,8 +289,8 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'epouse : </div>
-                            <div id="marry_full_name"> NaN</div>
+                            <div class="text-gray-500 dark:text-gray-400">Lieu de deces : </div>
+                            <div id="lieu_de_deces" class="uppercase"> Nan </div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -298,17 +298,8 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Lieu de mariage : </div>
-                            <div id="wedding_place" class="uppercase"> Nan </div>
-                            <div>
-                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Date de mariage : </div>
-                            <div id="wedding_date"> Nan</div>
+                            <div class="text-gray-500 dark:text-gray-400">Date de deces : </div>
+                            <div id="date_de_deces"> Nan</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -333,8 +324,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d’identite ou passport de l’epou</h3>
-                            <a onclick="viewPdf('carte_id_epou')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Certificat medical du deces</h3>
+                            <a onclick="viewPdf('certificat_medical_deces')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -342,35 +333,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d’identite ou passport de l’epouse</h3>
-                            <a onclick="viewPdf('carte_id_epouse')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat de naissance de l'epou</h3>
-                            <a onclick="viewPdf('certificat_naiss_epou')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat de naissance de l'epouse</h3>
-                            <a onclick="viewPdf('certificat_naiss_epouse')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Preuves de residences des epous</h3>
-                            <a onclick="viewPdf('preuves_res_epoux')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Preuve d'identite du defunt</h3>
+                            <a onclick="viewPdf('preuve_identite_defunt')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
 
@@ -406,7 +370,7 @@
             <p class="text-md text-dark dark:text-secondary font-light">VOTRE DECISION ❓</p>
 
             <div class="w-[30%]">
-                <button type="butto" class="space-y-2 mt-5 inline-flex items-center w-[50%] px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
+                <button type="button" class="space-y-2 mt-5 inline-flex items-center w-[50%] px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">
                     Accepter la demande
                  </button>
                  <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-light text-gray-900 focus:outline-none bg-white rounded border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-dark dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -529,54 +493,26 @@
         //console.log("http://localhost:8000/file/"+demande.actes_naissance.kid_certificat_medical)
 
 
-        if (document_+"" == "carte_id_epou"){
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.husband_id_card
+        if (document_+"" == "certificat_medical_deces"){
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.certificat_medical_deces
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte d'identite de l'epou")
+            localStorage.setItem("name_of_doc", "Certificat medical du deces")
             // await preview()
             //reload the page to view the change
             location.reload()
         }
 
 
-        if (document_+"" == "carte_id_epouse") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.marry_id_card
+        if (document_+"" == "preuve_identite_defunt") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.preuve_identite_defunt
             localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte d'identite de l'epouse")
+            localStorage.setItem("name_of_doc", "Preuve d'identite du defunt")
             // await preview()
             //reload the page to view the change
             location.reload()
         }
 
 
-        if (document_+"" == "certificat_naiss_epou") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.husband_certificat_naiss
-            localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte de naissance de l'epou")
-            // await preview()
-            //reload the page to view the change
-            location.reload()
-        }
-
-
-        if (document_+"" == "certificat_naiss_epouse") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.marry_certificat_naiss
-            localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Carte de naissance de l'epouse")
-            // await preview()
-            //reload the page to view the change
-            location.reload()
-        }
-
-
-        if (document_+"" == "preuves_res_epoux") {
-            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.couple_leaving_proof
-            localStorage.setItem("pdf_to_preview", pdf_name)
-            localStorage.setItem("name_of_doc", "Preuve de residences des epoux")
-            // await preview()
-            //reload the page to view the change
-            location.reload()
-        }
 
     }
 
