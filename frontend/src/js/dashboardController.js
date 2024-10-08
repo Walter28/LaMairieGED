@@ -40,23 +40,71 @@ async function getDemande() {
                 }).then(res => res.json())
             );
 
-            const acteNaissancePromises = demandes.map(demande =>
-                fetch(`http://localhost:8000/api/actes-de-naissance/demande/${demande.id}`, {
-                    method: 'get',
+            const acteNaissancePromises = demandes.map(async demande => {
+
+                // Déterminer le type de document en fonction de demande.type_document_id
+                let documentType = '';
+                switch(demande.type_document_id) {
+                    case 1:
+                        documentType = 'actes-de-naissance';
+                        break;
+                    case 2:
+                        documentType = 'actes-de-mariage';
+                        break;
+                    case 3:
+                        documentType = 'certificats-de-dece';
+                        break;
+                    case 4:
+                        documentType = 'certificats-de-residence';
+                        break;
+                    case 5:
+                        documentType = 'cartes-identite-nationale';
+                        break;
+                    case 6:
+                        documentType = 'certificats-de-celibat';
+                        break;
+                    case 7:
+                        documentType = 'permis-de-construire';
+                        break;
+                    default:
+                        documentType = 'actes-de-naissance'; // Par défaut, si aucune valeur n'est définie
+                }
+            
+                // Construire l'URL avec le documentType
+                const url = `http://localhost:8000/api/${documentType}/demande/${demande.id}`;
+            
+                // Faire la requête avec l'URL correcte
+                const res = await fetch(url, {
+                    method: 'GET',
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${authToken}`
                     }
-                }).then(res => res.json())
-            );
+                });
+                return await res.json();
+            
+            });
+            
+
+            // const acteMariagePromises = demandes.map(demande =>
+            //     fetch(`http://localhost:8000/api/actes-de-mariage/demande/${demande.id}`, {
+            //         method: 'get',
+            //         headers: {
+            //             'Accept': 'application/json',
+            //             'Authorization': `Bearer ${authToken}`
+            //         }
+            //     }).then(res => res.json())
+            // );
 
 
             // 3. Attendre que toutes les requêtes pour les utilisateurs, types de documents et actes de naissance soient terminées
             const users = await Promise.all(userPromises);
             const typeDocuments = await Promise.all(typeDocumentPromises);
             const actesNaissance = await Promise.all(acteNaissancePromises);
+            // const actesMariage= await Promise.all(acteMariagePromises)
             // 1. Normaliser les résultats des actes de naissance
             const flattenedActesNaissance = actesNaissance.flat();  // On aplatit les sous-tableaux
+            // const flattenedACtesMariage = actesMariage.flat();
 
             // console.log("demande : ",demandes.flat())
             // console.log("users : ", users)
@@ -100,13 +148,16 @@ async function getDemande() {
                 ...demande,
                 users: users[index] || null, // Un seul utilisateur correspondant à la demande
                 type_documents: typeDocuments[index] || null, // Un seul type de document correspondant
-                actes_naissance: flattenedActesNaissance[index] || [] // Les actes de naissance associés à la demande
+                actes_naissance: flattenedActesNaissance[index] || [], // Les actes de naissance associés à la demande
+                //actes_mariage: flattenedACtesMariage[index] || [] //les actes de mariage associes a la demande
             }));
+
+            console.log("type document : "+Object.values(typeDocuments))
             
 
             // demandesWithDetails = JSON.stringify(demandesWithDetails)
             // Stocker les informations de l'utilisateur actuel
-            localStorage.setItem('acteNaissData', JSON.stringify(demandesWithDetails));
+            localStorage.setItem('actesData', JSON.stringify(demandesWithDetails));
             demandesWithDetails = Object.values(demandesWithDetails);
             
             console.log("deamnde ", demandesWithDetails);
@@ -137,7 +188,7 @@ async function getDemande() {
                         ${demande.type_documents ? demande.type_documents.nom : 'N/A'}
                     </td>
                     <td class="px-6 py-4">
-                        <span class="bg-${demande.status === 'accepted' ? 'green' : 'red'}-100 text-${demande.status === 'accepted' ? 'green' : 'red'}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-${demande.status === 'accepted' ? 'green' : 'red'}-900 dark:text-${demande.status === 'accepted' ? 'green' : 'red'}-300">${demande.status}</span>
+                        <span class="bg-${demande.status === 'accepted' ? 'green' : 'red'}-100 text-${demande.status === 'accepted' ? 'green' : 'red'}-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-${demande.status === 'accepted' ? 'green' : 'red'}-300 dark:text-${demande.status === 'accepted' ? 'green' : 'red'}-500">${demande.status}</span>
                     </td>
                     <td class="px-6 py-4">
                         ${demande.submitting_date ? new Date(demande.submitting_date).toLocaleDateString() : 'N/A'}
@@ -146,7 +197,7 @@ async function getDemande() {
                         ${demande.traitement_date ? new Date(demande.traitement_date).toLocaleDateString() : 'N/A'}
                     </td>
                     <td class="px-6 py-4" onclick="">
-                        <a href="/acte-naiss-preview?id=${demande.id}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Voir ...</a>
+                        <a href="/${demande.type_documents.page_name}?id=${demande.id}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Voir ...</a>
                     </td>
                 `;
 

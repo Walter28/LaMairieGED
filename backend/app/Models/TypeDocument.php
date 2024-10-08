@@ -9,7 +9,7 @@ class TypeDocument extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'description'];
+    protected $fillable = ['nom', 'description', 'page_name'];
 
     /**
      * Get the demandes for the type of document.

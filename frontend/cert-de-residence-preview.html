@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My HTML Project with Tailwind CSS and Flowbite</title>
-    <link href="/src/styles.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My HTML Project with Tailwind CSS and Flowbite</title>
+  <link href="/src/styles.css" rel="stylesheet">
 
-    <script src="./src/js/saveUrl.js"></script>
+  <script src="./src/js/saveUrl.js"></script>
 
-    <script>
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+  </script>
 
-
-    <!-- simple-datatables CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
-    
-    <script src="./src/js/checkAccess.js"></script>
-    <script src="./src/js/save_pdf.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+  <script src="./src/js/authChecker.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
+  <script src="./src/js/certResPreviewController.js" type="module" defer></script>
+  <script src="./src/js/checkAccess.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
 
+</head>
 <body class="bg-white dark:bg-dark font-inter">
 
     <!-- Navbar -->
@@ -71,7 +69,7 @@
                         </a>
                         <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="flex-shrink-0">
-                            <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-2.jpg" alt="Joseph image">
+                            <img class="rounded-full w-11 h-11" id="profile_pic2" src="/docs/images/people/profile-picture-2.jpg" alt="Joseph image">
                             <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
                             <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                                 <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/>
@@ -163,7 +161,7 @@
                     </div>
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Admin Dashboard</a>
                     </li>
                     <!-- <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
@@ -181,7 +179,6 @@
         </div>
     </nav>
 
-    
     <!-- Main section of the document -->
     <!-- mt-[13%] sm:mt-[11%] md:mt-[9%] lg:mt-[7%] : ce code t'aide a gerer le conteneur d'en bas le sticky header de bien se positioner -->
     <main class="mt-[10%] sm:mt-[4%] md:mt-[4%] lg:mt-[4%]">
@@ -192,21 +189,32 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="dashboard-admin.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="dashboard.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
                     Admin Dashboard
                     </a>
                 </li>
-                <!-- <li>
+                <li>
                     <div class="flex items-center">
                     <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
-                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"><span class="text-primary">Zambrota kulibali</span></a>
+                    <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"><span class="text-primary uppercase" id="full_name">NaN</span></a>
                     </div>
-                </li> -->
+                </li>
+                <li>
+                    <button id="download" class="text-green-500 font-light flex flex-row gap-2 border-slate-500 shadow-sm hover:bg-green-400 hover:opacity-90 hover:text-green-600 rounded-lg p-2 bg-green-200">
+                        <svg class="w-6 h-6 text-gray-800 font-light dark:text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M13 11.15V4a1 1 0 1 0-2 0v7.15L8.78 8.374a1 1 0 1 0-1.56 1.25l4 5a1 1 0 0 0 1.56 0l4-5a1 1 0 1 0-1.56-1.25L13 11.15Z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M9.657 15.874 7.358 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-2.358l-2.3 2.874a3 3 0 0 1-4.685 0ZM17 16a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H17Z" clip-rule="evenodd"/>
+                          </svg>
+                          Telecharger
+                    </button>
+                    
+                      
+                </li>
                 </ol>
             </nav>
   
@@ -216,80 +224,49 @@
         <!-- USER PROFILES INFOS -->
         <section class="conteneur flex flex-col gap-3 border rounded-b-lg border-t-0 border-gray-200 dark:border-gray-600 ">
             <div class="up-header flex flex-row gap-3">
-                <p class="text-dark dark:text-secondary">TABLE DE DEMANDES</p>  
+                <p class="text-dark dark:text-secondary">PROFILE DU CITOYEN</p>
+                <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                </svg>     
             </div>
-
-
-
-            <div class="relative overflow-x-auto shadow-md mt-10 sm:rounded-lg">
-                <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-dark">
-                    <div>
-                        <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-dark dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                            <span class="sr-only">Action button</span>
-                            Action
-                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                            </svg>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-dark dark:divide-gray-600">
-                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate account</a>
-                                </li>
-                            </ul>
-                            <div class="py-1">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete User</a>
-                            </div>
-                        </div>
+            <div class="up-datas w-full flex gap-4">
+                <div class="user-datas w-[33%] flex flex-row items-end bg-re-700 gap-3">
+                    <div class="user-profile w-[50%]">
+                        <img src="" id="profile_pic_user" class="w-fit h-fit border border-primary" />
                     </div>
-                    <label for="table-search" class="sr-only">Search</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </div>
-                        <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-dark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                    <div class="user-personnal-info w-[50%] text-dark dark:text-secondary">
+                        <p class="font-bold text-xs text-secondary" id="full_name2">NaN</p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Ne le <span id="birth_date"></span> a <span id="birth_place"></span></p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Habite a/au <span id="address"></span></p>
+                        <p class="font-medium opacity-70 text-xs text-secondary">Nationnalite <span id="nationalite"></span></p>
                     </div>
                 </div>
-                <table id="kits" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-                                </div>
-                            </th>
-                            <th scope="col" class="px-6 py-3">Utilisateur</th>
-                            <th scope="col" class="px-6 py-3">Type de Document</th>
-                            <th scope="col" class="px-6 py-3">Statut</th>
-                            <th scope="col" class="px-6 py-3">Date de Soumission</th>
-                            <th scope="col" class="px-6 py-3">Date de Traitement</th>
-                            <th scope="col" class="px-6 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Les lignes de demandes seront ajoutées ici par JavaScript -->
-                    </tbody>
-                </table>
-            </div>
+                <div class="w-[33%] bg-gree-600 p-10">
 
-            
-            
+                    <h2 class="text-lg font-light text-primary">Info Additionnel</h2>
+
+                    <div class="flex items-center pl-5 my-1">
+                        <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="default-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja payer </label>
+                    </div>
+                    <div class="flex items-center pl-5">
+                        <input id="checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checked-checkbox" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">A deja retirer ?</label>
+                    </div>
+
+
+                </div>
+                <div class="w-[33%] ">
+                    <img src="./public/carte.jpg" alt="" srcset="">
+                </div>
+            </div>
         </section>
 
 
-        <!-- <section class="conteneur flex flex-col gap-3 my-20 border rounded-lg border-gray-200 dark:border-gray-600 ">
+        <section class="conteneur flex flex-col gap-3 my-20 border rounded-lg border-gray-200 dark:border-gray-600 ">
 
             <div class="title space-y-4">
-                <p class="text-lg font-light text-dark dark:text-secondary">DEMANDE ACTE DE NAISSANCE</p>
+                <p class="text-lg font-light text-dark dark:text-secondary">DEMANDE ACTE DE MARIAGE</p>
                 <p class="text-sm font-light text-primary">Donnee Fournie</p>
             </div>
 
@@ -303,8 +280,8 @@
                             <div></div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de l'enfant : </div>
-                            <div> Wil wilonja kulibali</div>
+                            <div class="text-gray-500 dark:text-gray-400">Nom complet du resident : </div>
+                            <div id="nom_complet_du_resident" class="uppercase"> NaN</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -312,8 +289,8 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Date de naissance de l'enfant : </div>
-                            <div> Mecredi le 28 Fevrier 2000</div>
+                            <div class="text-gray-500 dark:text-gray-400">Adresse actuel : </div>
+                            <div id="adresse_actuelle_de_la_residence" class="uppercase"> Nan </div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -321,26 +298,8 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Lieu de naissance : </div>
-                            <div> DRODRO</div>
-                            <div>
-                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet du Pere : </div>
-                            <div> Willy JOKOMBE wilonja</div>
-                            <div>
-                                <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 px-4 py-5 text-sm text-gray-500 border-b border-gray-200 gap-x-16 dark:border-gray-700">
-                            <div class="text-gray-500 dark:text-gray-400">Nom complet de la mere : </div>
-                            <div> Marie Jeanne</div>
+                            <div class="text-gray-500 dark:text-gray-400">Declaration sur l'honneur : </div>
+                            <div id="declaration_sur_l_honneur"> Nan</div>
                             <div>
                                 <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
@@ -365,8 +324,8 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat medical</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Preuve de residence</h3>
+                            <a onclick="viewPdf('preuve_de_residence')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
                     <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
@@ -374,33 +333,31 @@
                             <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
                         </div>
                         <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d'identite du pere</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
+                            <h3 class="text-sm tracking-wider">Carte d’identite du resident</h3>
+                            <a onclick="viewPdf('carte_identite_du_resident')" class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
                         </div>
                     </div>
-                    <div class="flex items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Carte d'identite de la mereh3</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
-                    <div class="hidden items-center bg-white border rounded-sm overflow-hidden shadow">
-                        <div class="p-1 bg-transparent h-20 w-20 border border-r">
-                            <img src="./public/pngegg.png" class="h-full w-full"  srcset="" />
-                        </div>
-                        <div class="px-4 text-gray-700">
-                            <h3 class="text-sm tracking-wider">Certificat medical</h3>
-                            <a class="text-xs text-blue-500 underline cursor-pointer">Voir le contenu</a>
-                        </div>
-                    </div>
+
                 </div>
 
+                
                 <div class="pdf-preview-container px-4 mt-8 sm:px-8">
-                    <p class="font-light text-sm my-5 text-dark dark:text-secondary">Preview of <span class="text-primary">Certificat medical</span></p>
-                    <canvas id="pdf-preview" class=" border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
+                    <p class="font-light text-sm my-5 text-dark dark:text-secondary">L'affichage de - <span class="text-primary" id="doc"></span></p>
+
+                    <div class="controls mt-6 text-white text-xs font-light flex flex-row gap-2 align-center pb-3">
+                        <button id="previous" class="previous bg-[#42A047] rounded-lg">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 16-4-4 4-4m-6 8-4-4 4-4"/>
+                            </svg> 
+                        </button>
+                        <p id="pageNumber" style="display: inline;">Page 1 sur 1</p>
+                        <button id="next" class="next bg-[#42A047] rounded-lg">
+                          <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 16 4-4-4-4m6 8 4-4-4-4"/>
+                          </svg>
+                        </button>
+                    </div>
+                    <canvas id="canvas" class="border-[0.5px] border-slate-600 h-auto w-[50%]"></canvas>
                 </div>
 
             </div>
@@ -421,7 +378,7 @@
                 </button>
             </div>
 
-        </section> -->
+        </section>
         
 
 
@@ -484,13 +441,185 @@
 
 
 
-    <!-- simple-datatables JavaScript -->
-     <!-- for generation pdf -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" type="module"></script>
-    <script src="./src/js/dashboardController.js" type="module"></script>
-    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
-    <script src="./src/js/main.js"></script>
-    <script src="./src/js/logout.js"></script>
-</body>
 
+    
+
+  
+
+
+
+<!-- <script src="./src/js/acteNaissPreviewController.js" type="module"></script> -->
+<script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="./src/js/main.js"></script>
+<script src="./src/js/logout.js"></script>
+
+<!-- for pdf preview  -->
+<!-- <script src="./node_modules/pdfjs-dist/build/pdf.mjs" type="module"></script> -->
+<!-- <script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from './node_modules/pdfjs-dist/build/pdf.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+// Set workerSrc
+//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+        
+</script> -->
+
+<script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs';
+// Set workerSrc
+//pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+        
+</script>
+
+<script>
+
+    async function viewPdf(document_){        
+
+        const params = new URLSearchParams(window.location.search);
+        let id =  parseInt(params.get('id'));
+        // alert(id)
+        // Vérifie si le token d'authentification existe dans localStorage
+        let demande = localStorage.getItem("actesData")
+        demande = JSON.parse(demande)
+        demande =  demande.find(dmd => dmd.id === id);
+
+        //console.log("demande ",demande)
+        //console.log("http://localhost:8000/file/"+demande.actes_naissance.kid_certificat_medical)
+
+
+        if (document_+"" == "preuve_de_residence"){
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.preuve_de_residence
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Preuve de residence")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
+        }
+
+
+        if (document_+"" == "carte_identite_du_resident") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.carte_identite_du_resident
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Carte d'identite du resident")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
+        }
+
+
+        if (document_+"" == "certificat_naiss_epou") {
+            let pdf_name = "http://127.0.0.1:8000/file/"+demande.actes_naissance.husband_certificat_naiss
+            localStorage.setItem("pdf_to_preview", pdf_name)
+            localStorage.setItem("name_of_doc", "Carte de naissance de l'epou")
+            // await preview()
+            //reload the page to view the change
+            location.reload()
+        }
+
+
+
+    }
+
+</script>
+
+<!-- pdf js from vendor : local  -->
+<!-- <script src="C:/Users/Virunga-System/Documents/Projects/Memoire/LaMairieGED/frontend/src/vendor/js/PDF.Js/build/pdf.mjs"></script> -->
+<!-- pdfjs worker from vendor -->
+<!-- <script src="C:/Users/Virunga-System/Documents/Projects/Memoire/LaMairieGED/frontend/src/vendor/js/PDF.Js/build/pdf.worker.mjs"></script> -->
+
+<!-- this script is used now to preview the PDF and manage it  -->
+<script type="module">
+
+    // Import PDF.js library
+    import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.mjs';
+     // Spécifier le chemin du worker via un lien CDN ou un chemin absolu
+     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.mjs';
+
+    (async function () {
+
+        let pdf_to_preview = localStorage.getItem('pdf_to_preview') ?? ''
+        let name_of_doc = localStorage.getItem("name_of_doc") ?? ''
+        document.getElementById("doc").innerHTML = name_of_doc
+        //alert(pdf_to_preview)
+        
+
+        let pdf_link = "compressed.tracemonkey-pldi-09.pdf"
+        const doc = await pdfjsLib.getDocument(pdf_to_preview).promise
+
+        const minPage = 1;
+        const maxPage = doc._pdfInfo.numPages;
+        let currentPage = 1
+        console.log("num pager : ", maxPage)
+
+        //get page 1
+        await getPage(doc, currentPage)
+
+        // Display the page number
+        document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+
+        // The previous button click event
+        document.getElementById("previous").addEventListener("click", async () => {
+
+            if(currentPage > minPage) {
+                // Get the previous page
+                await getPage(doc, currentPage--)
+                // Display the page number
+                document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+            }
+
+        })
+
+        // The next button click event
+        document.getElementById("next").addEventListener("click", async () => {
+
+            
+
+            if(currentPage < maxPage) {
+                // Get the previous page
+                await getPage(doc, currentPage++)
+                // Display the page number
+                document.getElementById("pageNumber").innerHTML = `Page ${currentPage} sur ${maxPage}`
+            }
+
+        })
+
+    })()
+
+    async function getPage(doc, pageNumber){
+
+        if (pageNumber>= 1 && pageNumber <= doc._pdfInfo.numPages){
+
+            // Fetch the page
+            const page = await doc.getPage(pageNumber)
+
+            // Set the viewport
+            const viewport = page.getViewport({ scale: 1.5})
+
+            // Set the canva dimensions to the PDF page dimensions
+            const canvas = document.getElementById("canvas")
+            const context = canvas.getContext("2d")
+            canvas.height = viewport.height
+            canvas.width = viewport.width
+            
+            // Render the PDF t=into the canvas context
+            return await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise
+
+        } else {
+            console.log("Please specify a valid pdf number")
+        }
+
+    }
+
+</script>
+
+</body>
 </html>
