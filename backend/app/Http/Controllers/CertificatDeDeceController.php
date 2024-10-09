@@ -32,7 +32,7 @@ class CertificatDeDeceController extends Controller
             'nom_complet_defunt' => 'required|string|max:255',
             'date_de_deces' => 'required|date',
             'lieu_de_deces' => 'required|string|max:255',
-            'certificat_medical' => 'required|file|mimes:pdf|max:2048',
+            'certificat_medical_deces' => 'required|file|mimes:pdf|max:2048',
             'preuve_identite_defunt' => 'required|file|mimes:pdf|max:2048',
         ]);
 
@@ -48,9 +48,9 @@ class CertificatDeDeceController extends Controller
         }
 
         // Gérer le téléchargement de fichier pour certificat_medical
-        if ($request->hasFile('certificat_medical')) {
-            $fileName = generateFileName('certificat_medical', $request->file('certificat_medical')->getClientOriginalName());
-            $request->file('certificat_medical')->storeAs("public/{$storagePath}", $fileName);
+        if ($request->hasFile('certificat_medical_deces')) {
+            $fileName = generateFileName('certificat_medical_deces', $request->file('certificat_medical_deces')->getClientOriginalName());
+            $request->file('certificat_medical_deces')->storeAs("public/{$storagePath}", $fileName);
             $certificat_medical_path = "{$storagePath}/{$fileName}";
         }
 
@@ -67,7 +67,7 @@ class CertificatDeDeceController extends Controller
             'nom_complet_defunt' => $validated['nom_complet_defunt'],
             'date_de_deces' => $validated['date_de_deces'],
             'lieu_de_deces' => $validated['lieu_de_deces'],
-            'certificat_medical' => $certificat_medical_path,
+            'certificat_medical_deces' => $certificat_medical_path,
             'preuve_identite_defunt' => $preuve_identite_path,
         ]);
 
@@ -86,7 +86,7 @@ class CertificatDeDeceController extends Controller
             'nom_complet_defunt' => 'sometimes|string|max:255',
             'date_de_deces' => 'sometimes|date',
             'lieu_de_deces' => 'sometimes|string|max:255',
-            'certificat_medical' => 'sometimes|file|mimes:pdf|max:2048',
+            'certificat_medical_deces' => 'sometimes|file|mimes:pdf|max:2048',
             'preuve_identite_defunt' => 'sometimes|file|mimes:pdf|max:2048',
         ]);
 
@@ -96,15 +96,15 @@ class CertificatDeDeceController extends Controller
         // Dossier de stockage pour le certificat de décès
         $storagePath = "demandes/certificat_de_deces/{$validated['demande_id']}";
 
-        // Gérer le téléchargement de fichier pour certificat_medical
-        if ($request->hasFile('certificat_medical')) {
-            if ($certificatDeDece->certificat_medical) {
-                Storage::delete("public/{$certificatDeDece->certificat_medical}");
+        // Gérer le téléchargement de fichier pour certificat_medical_deces
+        if ($request->hasFile('certificat_medical_deces')) {
+            if ($certificatDeDece->certificat_medical_deces) {
+                Storage::delete("public/{$certificatDeDece->certificat_medical_deces}");
             }
 
-            $fileName = generateFileName('certificat_medical', $request->file('certificat_medical')->getClientOriginalName());
-            $request->file('certificat_medical')->storeAs("public/{$storagePath}", $fileName);
-            $certificatDeDece->certificat_medical = "{$storagePath}/{$fileName}";
+            $fileName = generateFileName('certificat_medical_deces', $request->file('certificat_medical_deces')->getClientOriginalName());
+            $request->file('certificat_medical_deces')->storeAs("public/{$storagePath}", $fileName);
+            $certificatDeDece->certificat_medical_deces = "{$storagePath}/{$fileName}";
         }
 
         // Gérer le téléchargement de fichier pour preuve_identite_defunt
@@ -134,8 +134,8 @@ class CertificatDeDeceController extends Controller
         $certificatDeDece = CertificatDeDece::findOrFail($id);
 
         // Supprimer les fichiers associés
-        if ($certificatDeDece->certificat_medical) {
-            Storage::delete("public/{$certificatDeDece->certificat_medical}");
+        if ($certificatDeDece->certificat_medical_deces) {
+            Storage::delete("public/{$certificatDeDece->certificat_medical_deces}");
         }
         if ($certificatDeDece->preuve_identite_defunt) {
             Storage::delete("public/{$certificatDeDece->preuve_identite_defunt}");
