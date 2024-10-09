@@ -33,7 +33,7 @@ class CertificatDeResidenceController extends Controller
             'nom_complet_du_resident' => 'required|string|max:255',
             'adresse_actuelle_de_la_residence' => 'required|string|max:255',
             'preuve_de_residence' => 'required|file|mimes:jpeg,png,pdf|max:2048',
-            'carte_d_identite_du_resident' => 'required|file|mimes:jpeg,png,pdf|max:2048',
+            'carte_identite_du_resident' => 'required|file|mimes:jpeg,png,pdf|max:2048',
             'declaration_sur_l_honneur' => 'required|string|max:255',
         ]);
 
@@ -55,11 +55,11 @@ class CertificatDeResidenceController extends Controller
             $preuve_de_residence_path = "{$storagePath}/{$fileName}";
         }
 
-        // Gérer le téléchargement de fichier pour carte_d_identite_du_resident
-        if ($request->hasFile('carte_d_identite_du_resident')) {
-            $fileName = generateFileName('carte_d_identite_du_resident', $request->file('carte_d_identite_du_resident')->getClientOriginalName());
-            $request->file('carte_d_identite_du_resident')->storeAs("public/{$storagePath}", $fileName);
-            $carte_d_identite_path = "{$storagePath}/{$fileName}";
+        // Gérer le téléchargement de fichier pour carte_identite_du_resident
+        if ($request->hasFile('carte_identite_du_resident')) {
+            $fileName = generateFileName('carte_identite_du_resident', $request->file('carte_identite_du_resident')->getClientOriginalName());
+            $request->file('carte_identite_du_resident')->storeAs("public/{$storagePath}", $fileName);
+            $carte_identite_path = "{$storagePath}/{$fileName}";
         }
 
         // Création de l'enregistrement du certificat de résidence
@@ -68,7 +68,7 @@ class CertificatDeResidenceController extends Controller
             'nom_complet_du_resident' => $validated['nom_complet_du_resident'],
             'adresse_actuelle_de_la_residence' => $validated['adresse_actuelle_de_la_residence'],
             'preuve_de_residence' => $preuve_de_residence_path,  // Chemin complet de la preuve de résidence
-            'carte_d_identite_du_resident' => $carte_d_identite_path,  // Chemin complet de la carte d'identité
+            'carte_identite_du_resident' => $carte_identite_path,  // Chemin complet de la carte d'identité
             'declaration_sur_l_honneur' => $validated['declaration_sur_l_honneur'],
         ]);
 
@@ -87,7 +87,7 @@ class CertificatDeResidenceController extends Controller
             'nom_complet_du_resident' => 'sometimes|string|max:255',
             'adresse_actuelle_de_la_residence' => 'sometimes|string|max:255',
             'preuve_de_residence' => 'sometimes|file|mimes:jpeg,png,pdf|max:2048',
-            'carte_d_identite_du_resident' => 'sometimes|file|mimes:jpeg,png,pdf|max:2048',
+            'carte_identite_du_resident' => 'sometimes|file|mimes:jpeg,png,pdf|max:2048',
             'declaration_sur_l_honneur' => 'sometimes|string|max:255',
         ]);
 
@@ -109,16 +109,16 @@ class CertificatDeResidenceController extends Controller
             $certificatDeResidence->preuve_de_residence = "{$storagePath}/{$fileName}";
         }
 
-        // Gérer le téléchargement de fichier pour carte_d_identite_du_resident
-        if ($request->hasFile('carte_d_identite_du_resident')) {
+        // Gérer le téléchargement de fichier pour carte_identite_du_resident
+        if ($request->hasFile('carte_identite_du_resident')) {
             // Supprimer l'ancien fichier s'il existe
-            if ($certificatDeResidence->carte_d_identite_du_resident) {
-                Storage::delete("public/{$certificatDeResidence->carte_d_identite_du_resident}");
+            if ($certificatDeResidence->carte_identite_du_resident) {
+                Storage::delete("public/{$certificatDeResidence->carte_identite_du_resident}");
             }
 
-            $fileName = generateFileName('carte_d_identite_du_resident', $request->file('carte_d_identite_du_resident')->getClientOriginalName());
-            $request->file('carte_d_identite_du_resident')->storeAs("public/{$storagePath}", $fileName);
-            $certificatDeResidence->carte_d_identite_du_resident = "{$storagePath}/{$fileName}";
+            $fileName = generateFileName('carte_identite_du_resident', $request->file('carte_identite_du_resident')->getClientOriginalName());
+            $request->file('carte_identite_du_resident')->storeAs("public/{$storagePath}", $fileName);
+            $certificatDeResidence->carte_identite_du_resident = "{$storagePath}/{$fileName}";
         }
 
         // Mettre à jour les autres champs
@@ -140,8 +140,8 @@ class CertificatDeResidenceController extends Controller
         if ($certificatDeResidence->preuve_de_residence) {
             Storage::delete("public/{$certificatDeResidence->preuve_de_residence}");
         }
-        if ($certificatDeResidence->carte_d_identite_du_resident) {
-            Storage::delete("public/{$certificatDeResidence->carte_d_identite_du_resident}");
+        if ($certificatDeResidence->carte_identite_du_resident) {
+            Storage::delete("public/{$certificatDeResidence->carte_identite_du_resident}");
         }
 
         // Supprimer l'enregistrement du certificat de résidence
