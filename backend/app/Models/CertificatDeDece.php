@@ -15,6 +15,7 @@ class CertificatDeDece extends Model
         'lieu_de_deces',
         'certificat_medical_deces',
         'preuve_identite_defunt',
+        'demande_id'
     ];
 
     public function demande()
