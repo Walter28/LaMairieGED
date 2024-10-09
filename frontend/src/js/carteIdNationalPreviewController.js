@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //donnee fournies
     document.getElementById('nom_complet_citoyen').innerHTML = demande.actes_naissance.nom_complet_citoyen
-    document.getElementById('date_naissance').innerHTML = demande.actes_naissance.date_naissance
+    document.getElementById('date_de_naissance').innerHTML = demande.actes_naissance.date_de_naissance
     document.getElementById('lieu_de_naissance').innerHTML = demande.actes_naissance.lieu_de_naissance
     document.getElementById('adresse_actuelle').innerHTML = demande.actes_naissance.adresse_actuelle
     
@@ -68,7 +68,7 @@ const lieuNaissance = demande.actes_naissance.lieu_de_naissance
 const adresseActuelle = demande.actes_naissance.adresse_actuelle
 const numElecteur = "A34577707";
 const origine = "Kapamay/Bukama/Haut-Lomami";
-const imageURL = `http://localhost:8000/storage/${demande.actes_naissance.photo_identite}`
+const imageURL = `http://localhost:8000/file/${demande.actes_naissance.photo_identite}`
 
 // Définir les styles de police
 doc.setFont('helvetica', 'normal');
