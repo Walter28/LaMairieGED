@@ -30,10 +30,10 @@ class PermisDeConstruireController extends Controller
         // Validation des champs
         $validated = $request->validate([
             'demande_id' => 'required|exists:demandes,id',
-            'nom_du_demandeur' => 'required|string|max:255',
+            'nom_demandeur' => 'required|string|max:255',
             'adresse_site_construction' => 'required|string|max:255',
-            'plans_de_construction' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'permis_durbanisme' => 'sometimes|file|mimes:pdf|max:2048',
+            'plans_construction' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'permis_urbanisme' => 'sometimes|file|mimes:pdf|max:2048',
             'preuve_propriete_terrain' => 'required|file|mimes:pdf|max:2048',
             'preuve_identite' => 'required|file|mimes:pdf|max:2048',
         ]);
@@ -49,18 +49,18 @@ class PermisDeConstruireController extends Controller
             return Str::snake($fieldName) . '_' . Str::slug($nameWithoutExtension) . '.' . $extension;
         }
 
-        // Gérer le téléchargement de fichier pour plans_de_construction
-        if ($request->hasFile('plans_de_construction')) {
-            $fileName = generateFileName('plans_de_construction', $request->file('plans_de_construction')->getClientOriginalName());
-            $request->file('plans_de_construction')->storeAs("public/{$storagePath}", $fileName);
-            $plans_de_construction_path = "{$storagePath}/{$fileName}";
+        // Gérer le téléchargement de fichier pour plans_construction
+        if ($request->hasFile('plans_construction')) {
+            $fileName = generateFileName('plans_construction', $request->file('plans_construction')->getClientOriginalName());
+            $request->file('plans_construction')->storeAs("public/{$storagePath}", $fileName);
+            $plans_construction_path = "{$storagePath}/{$fileName}";
         }
 
-        // Gérer le téléchargement de fichier pour permis_durbanisme
-        if ($request->hasFile('permis_durbanisme')) {
-            $fileName = generateFileName('permis_durbanisme', $request->file('permis_durbanisme')->getClientOriginalName());
-            $request->file('permis_durbanisme')->storeAs("public/{$storagePath}", $fileName);
-            $permis_durbanisme_path = "{$storagePath}/{$fileName}";
+        // Gérer le téléchargement de fichier pour permis_urbanisme
+        if ($request->hasFile('permis_urbanisme')) {
+            $fileName = generateFileName('permis_urbanisme', $request->file('permis_urbanisme')->getClientOriginalName());
+            $request->file('permis_urbanisme')->storeAs("public/{$storagePath}", $fileName);
+            $permis_urbanisme_path = "{$storagePath}/{$fileName}";
         }
 
         // Gérer le téléchargement de fichier pour preuve_propriete_terrain
@@ -80,10 +80,10 @@ class PermisDeConstruireController extends Controller
         // Création de l'enregistrement du permis de construire
         $permisDeConstruire = PermisDeConstruire::create([
             'demande_id' => $validated['demande_id'],
-            'nom_du_demandeur' => $validated['nom_du_demandeur'],
+            'nom_demandeur' => $validated['nom_demandeur'],
             'adresse_site_construction' => $validated['adresse_site_construction'],
-            'plans_de_construction' => $plans_de_construction_path,
-            'permis_durbanisme' => $permis_durbanisme_path ?? null,
+            'plans_construction' => $plans_construction_path,
+            'permis_urbanisme' => $permis_urbanisme_path ?? null,
             'preuve_propriete_terrain' => $preuve_propriete_terrain_path,
             'preuve_identite' => $preuve_identite_path,
         ]);
@@ -116,10 +116,10 @@ class PermisDeConstruireController extends Controller
         // Validation des champs
         $validated = $request->validate([
             'demande_id' => 'required|exists:demandes,id',
-            'nom_du_demandeur' => 'sometimes|string|max:255',
+            'nom_demandeur' => 'sometimes|string|max:255',
             'adresse_site_construction' => 'sometimes|string|max:255',
-            'plans_de_construction' => 'sometimes|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'permis_durbanisme' => 'sometimes|file|mimes:pdf|max:2048',
+            'plans_construction' => 'sometimes|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'permis_urbanisme' => 'sometimes|file|mimes:pdf|max:2048',
             'preuve_propriete_terrain' => 'sometimes|file|mimes:pdf|max:2048',
             'preuve_identite' => 'sometimes|file|mimes:pdf|max:2048',
         ]);
@@ -130,28 +130,28 @@ class PermisDeConstruireController extends Controller
         // Dossier de stockage pour le permis de construire
         $storagePath = "demandes/permis_de_construire/{$validated['demande_id']}";
 
-        // Gérer le téléchargement de fichier pour plans_de_construction
-        if ($request->hasFile('plans_de_construction')) {
+        // Gérer le téléchargement de fichier pour plans_construction
+        if ($request->hasFile('plans_construction')) {
             // Supprimer l'ancien fichier s'il existe
-            if ($permisDeConstruire->plans_de_construction) {
-                Storage::delete("public/{$permisDeConstruire->plans_de_construction}");
+            if ($permisDeConstruire->plans_construction) {
+                Storage::delete("public/{$permisDeConstruire->plans_construction}");
             }
 
-            $fileName = generateFileName('plans_de_construction', $request->file('plans_de_construction')->getClientOriginalName());
-            $request->file('plans_de_construction')->storeAs("public/{$storagePath}", $fileName);
-            $permisDeConstruire->plans_de_construction = "{$storagePath}/{$fileName}";
+            $fileName = generateFileName('plans_construction', $request->file('plans_construction')->getClientOriginalName());
+            $request->file('plans_construction')->storeAs("public/{$storagePath}", $fileName);
+            $permisDeConstruire->plans_construction = "{$storagePath}/{$fileName}";
         }
 
-        // Gérer le téléchargement de fichier pour permis_durbanisme
-        if ($request->hasFile('permis_durbanisme')) {
+        // Gérer le téléchargement de fichier pour permis_urbanisme
+        if ($request->hasFile('permis_urbanisme')) {
             // Supprimer l'ancien fichier s'il existe
-            if ($permisDeConstruire->permis_durbanisme) {
-                Storage::delete("public/{$permisDeConstruire->permis_durbanisme}");
+            if ($permisDeConstruire->permis_urbanisme) {
+                Storage::delete("public/{$permisDeConstruire->permis_urbanisme}");
             }
 
-            $fileName = generateFileName('permis_durbanisme', $request->file('permis_durbanisme')->getClientOriginalName());
-            $request->file('permis_durbanisme')->storeAs("public/{$storagePath}", $fileName);
-            $permisDeConstruire->permis_durbanisme = "{$storagePath}/{$fileName}";
+            $fileName = generateFileName('permis_urbanisme', $request->file('permis_urbanisme')->getClientOriginalName());
+            $request->file('permis_urbanisme')->storeAs("public/{$storagePath}", $fileName);
+            $permisDeConstruire->permis_urbanisme = "{$storagePath}/{$fileName}";
         }
 
         // Gérer le téléchargement de fichier pour preuve_propriete_terrain
@@ -180,8 +180,8 @@ class PermisDeConstruireController extends Controller
 
         // Mettre à jour les autres champs
         $permisDeConstruire->demande_id = $validated['demande_id'];
-        if (isset($validated['nom_du_demandeur'])) {
-            $permisDeConstruire->nom_du_demandeur = $validated['nom_du_demandeur'];
+        if (isset($validated['nom_demandeur'])) {
+            $permisDeConstruire->nom_demandeur = $validated['nom_demandeur'];
         }
         if (isset($validated['adresse_site_construction'])) {
             $permisDeConstruire->adresse_site_construction = $validated['adresse_site_construction'];
@@ -202,11 +202,11 @@ class PermisDeConstruireController extends Controller
         $permisDeConstruire = PermisDeConstruire::findOrFail($id);
 
         // Supprimer les fichiers associés s'ils existent
-        if ($permisDeConstruire->plans_de_construction) {
-            Storage::delete("public/{$permisDeConstruire->plans_de_construction}");
+        if ($permisDeConstruire->plans_construction) {
+            Storage::delete("public/{$permisDeConstruire->plans_construction}");
         }
-        if ($permisDeConstruire->permis_durbanisme) {
-            Storage::delete("public/{$permisDeConstruire->permis_durbanisme}");
+        if ($permisDeConstruire->permis_urbanisme) {
+            Storage::delete("public/{$permisDeConstruire->permis_urbanisme}");
         }
         if ($permisDeConstruire->preuve_propriete_terrain) {
             Storage::delete("public/{$permisDeConstruire->preuve_propriete_terrain}");

@@ -30,11 +30,11 @@ class CertificatDeCelibatController extends Controller
         $validated = $request->validate([
             'demande_id' => 'required|exists:demandes,id',
             'nom_complet_celibataire' => 'required|string|max:255',
-            'date_de_naissance' => 'required|date',
-            'lieu_de_naissance' => 'required|string|max:255',
+            'date_naissance' => 'required|date',
+            'lieu_naissance' => 'required|string|max:255',
             'preuve_identite' => 'required|file|mimes:pdf|max:2048',
-            'acte_de_naissance' => 'required|file|mimes:pdf|max:2048',
-            'declaration_sur_honneur' => 'required|string',
+            'acte_naissance' => 'required|file|mimes:pdf|max:2048',
+            'declaration_honneur' => 'required|string',
         ]);
 
         // Dossier de stockage
@@ -55,22 +55,22 @@ class CertificatDeCelibatController extends Controller
             $preuve_identite_path = "{$storagePath}/{$fileName}";
         }
 
-        // Gérer le téléchargement de fichier pour `acte_de_naissance`
-        if ($request->hasFile('acte_de_naissance')) {
-            $fileName = generateFileName('acte_de_naissance', $request->file('acte_de_naissance')->getClientOriginalName());
-            $request->file('acte_de_naissance')->storeAs("public/{$storagePath}", $fileName);
-            $acte_de_naissance_path = "{$storagePath}/{$fileName}";
+        // Gérer le téléchargement de fichier pour `acte_naissance`
+        if ($request->hasFile('acte_naissance')) {
+            $fileName = generateFileName('acte_naissance', $request->file('acte_naissance')->getClientOriginalName());
+            $request->file('acte_naissance')->storeAs("public/{$storagePath}", $fileName);
+            $acte_naissance_path = "{$storagePath}/{$fileName}";
         }
 
         // Création de l'enregistrement
         $certificatDeCelibat = CertificatDeCelibat::create([
             'demande_id' => $validated['demande_id'],
             'nom_complet_celibataire' => $validated['nom_complet_celibataire'],
-            'date_de_naissance' => $validated['date_de_naissance'],
-            'lieu_de_naissance' => $validated['lieu_de_naissance'],
+            'date_naissance' => $validated['date_naissance'],
+            'lieu_naissance' => $validated['lieu_naissance'],
             'preuve_identite' => $preuve_identite_path,
-            'acte_de_naissance' => $acte_de_naissance_path,
-            'declaration_sur_honneur' => $validated['declaration_sur_honneur'],
+            'acte_naissance' => $acte_naissance_path,
+            'declaration_honneur' => $validated['declaration_honneur'],
         ]);
 
         return response()->json([
@@ -99,11 +99,11 @@ class CertificatDeCelibatController extends Controller
         $validated = $request->validate([
             'demande_id' => 'required|exists:demandes,id',
             'nom_complet_celibataire' => 'sometimes|string|max:255',
-            'date_de_naissance' => 'sometimes|date',
-            'lieu_de_naissance' => 'sometimes|string|max:255',
+            'date_naissance' => 'sometimes|date',
+            'lieu_naissance' => 'sometimes|string|max:255',
             'preuve_identite' => 'sometimes|file|mimes:pdf|max:2048',
-            'acte_de_naissance' => 'sometimes|file|mimes:pdf|max:2048',
-            'declaration_sur_honneur' => 'sometimes|string',
+            'acte_naissance' => 'sometimes|file|mimes:pdf|max:2048',
+            'declaration_honneur' => 'sometimes|string',
         ]);
 
         $certificatDeCelibat = CertificatDeCelibat::findOrFail($id);
@@ -119,13 +119,13 @@ class CertificatDeCelibatController extends Controller
             $certificatDeCelibat->preuve_identite = "{$storagePath}/{$fileName}";
         }
 
-        if ($request->hasFile('acte_de_naissance')) {
-            if ($certificatDeCelibat->acte_de_naissance) {
-                Storage::delete("public/{$certificatDeCelibat->acte_de_naissance}");
+        if ($request->hasFile('acte_naissance')) {
+            if ($certificatDeCelibat->acte_naissance) {
+                Storage::delete("public/{$certificatDeCelibat->acte_naissance}");
             }
-            $fileName = generateFileName('acte_de_naissance', $request->file('acte_de_naissance')->getClientOriginalName());
-            $request->file('acte_de_naissance')->storeAs("public/{$storagePath}", $fileName);
-            $certificatDeCelibat->acte_de_naissance = "{$storagePath}/{$fileName}";
+            $fileName = generateFileName('acte_naissance', $request->file('acte_naissance')->getClientOriginalName());
+            $request->file('acte_naissance')->storeAs("public/{$storagePath}", $fileName);
+            $certificatDeCelibat->acte_naissance = "{$storagePath}/{$fileName}";
         }
 
         $certificatDeCelibat->update($validated);
@@ -145,8 +145,8 @@ class CertificatDeCelibatController extends Controller
             Storage::delete("public/{$certificatDeCelibat->preuve_identite}");
         }
 
-        if ($certificatDeCelibat->acte_de_naissance) {
-            Storage::delete("public/{$certificatDeCelibat->acte_de_naissance}");
+        if ($certificatDeCelibat->acte_naissance) {
+            Storage::delete("public/{$certificatDeCelibat->acte_naissance}");
         }
 
         $certificatDeCelibat->delete();

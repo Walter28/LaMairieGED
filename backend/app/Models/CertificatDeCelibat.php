@@ -9,7 +9,7 @@ class CertificatDeCelibat extends Model
 {
     use HasFactory;
 
-    protected $table = 'certificat_de_celibat';
+    protected $table = 'certificat_de_celibats';
 
     protected $fillable = [
         'nom_complet_celibataire',

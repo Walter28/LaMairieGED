@@ -17,7 +17,7 @@
     }
   </script>
   <script src="./src/js/authChecker.js" defer></script>
-  <script src="./src/js/acteNaissController.js" type="module" defer></script>
+  <script src="./src/js/certCelibatController.js" type="module" defer></script>
   <script src="./src/js/logout.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </head>
@@ -275,11 +275,11 @@
             <section class="demandes-zone w-full flex flex-row">
 
                 <div class="p-10 w-[40%] bg-re-500">
-                    <img src="./public/wilonja.png" />
+                    <!-- <img src="./public/wilonja.png" /> -->
                 </div>
                 <div class="p-10 w-[60%] bg-gree-700">
 
-                    <form action="" id="demandeActeNaissForm" enctype="multipart/form-data">
+                    <form action="" id="certCelibatForm" enctype="multipart/form-data">
                         <div class="flex flex-row gap-2 items-center justify-between">
                             <label class="text-2xl font-light text-dark dark:text-secondary ">Formulaire</label>
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -369,7 +369,7 @@
                          <div >
                             <label for="kid_birth_date" class="block mb-2 text-xs font-light text-black dark:text-secondary">Déclaration Sous Honneur</label>
                             <!-- <input type="text" name="declaration_honneur" id="declaration_honneur" placeholder="Déclaration Sous Honneur " required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"> -->
-                            <textarea name="" id="" cols="30" rows="10" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"></textarea>
+                            <textarea name="declaration_honneur" id="declaration_honneur" cols="30" rows="10" required="" class="bg-gray-50 border border-secondary text-gray-900 text-xs rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-3 dark:bg-dark dark:border-cardStroke dark:placeholder-formIcon dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"></textarea>
                         </div>
 
                          <button type="submit" class="space-y-2 mt-5 inline-flex items-center w-full px-3 py-3 justify-center text-sm font-light font-inter text-center text-white bg-primary rounded hover:bg-pink-600 focus:ring-2 focus:outline-none focus:ring-pink-300 dark:bg-primary dark:hover:opacity-90 dark:focus:ring-pink-800">

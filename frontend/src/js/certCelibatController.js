@@ -4,7 +4,7 @@ import { showSuccessToast } from "./showSuccessToast.js";
 // USER AUTH //////////////////////////////////////////////////////////////////
 
 // Acte de naissance
-const demandeActeNaissForm = document.getElementById('permisConstruireForm');
+const demandeActeNaissForm = document.getElementById('certCelibatForm');
 demandeActeNaissForm.addEventListener('submit', async e => {
     e.preventDefault();
 
@@ -17,7 +17,7 @@ demandeActeNaissForm.addEventListener('submit', async e => {
     // Create the FormData object
     const demande_body = new FormData();
     demande_body.append('user_id', currentUser.id);
-    demande_body.append('type_document_id', 7);
+    demande_body.append('type_document_id', 6);
     demande_body.append('status', 'attente');
     demande_body.append('submitting_date', new Date().toISOString());
 
@@ -35,7 +35,7 @@ demandeActeNaissForm.addEventListener('submit', async e => {
 
         if (response.ok) {
 
-            const url_acte = 'http://localhost:8000/api/permis-de-construire'
+            const url_acte = 'http://localhost:8000/api/certificats-de-celibat'
             const formData = new FormData(demandeActeNaissForm)
             formData.append('demande_id', data.id)
 
