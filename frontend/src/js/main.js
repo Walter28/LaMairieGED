@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user_name').innerText = currentUser.full_name
         document.getElementById('user_email').innerText = currentUser.email
 
-        const baseURL = 'http://localhost:8000/file/'; // Replace with your actual backend URL
+        const baseURL = 'http://localhost:8000/storage/'; // Replace with your actual backend URL
         const profilePicPath = currentUser.profile_pic // Path from the object
         const profilePicURL = baseURL + profilePicPath;
          // Display the image on the frontend
