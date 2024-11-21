@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const profilePicURL = baseURL + profilePicPath;
          // Display the image on the frontend
         document.getElementById('profile_pic').src = profilePicURL;
+        // alert(1)
 
 
 

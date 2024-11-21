@@ -17,10 +17,11 @@ class ActeDeNaissanceController extends Controller
         return response()->json($actes);
     }
 
-    // Afficher un acte de naissance spécifique
-    public function show(ActeDeNaissance $acteDeNaissance)
+    // 2. Afficher un acte de naissance spécifique
+    public function show($id)
     {
-        return response()->json($acteDeNaissance);
+        $acte = ActeDeNaissance::findOrFail($id);
+        return response()->json($acte);
     }
 
     // Méthode pour créer un nouvel acte de naissance
@@ -89,6 +90,23 @@ class ActeDeNaissanceController extends Controller
             'acte_de_naissance' => $acteDeNaissance
         ], 201);
     }
+
+    // Méthode pour récupérer les actes de naissance par demande_id
+    public function getByDemandeId($demande_id)
+    {
+        // Récupérer tous les actes de naissance associés à un demande_id spécifique
+        $actes = ActeDeNaissance::where('demande_id', $demande_id)->get();
+
+        // Si aucun acte de naissance n'est trouvé
+        if ($actes->isEmpty()) {
+            return response()->json([
+                'message' => 'Aucun acte de naissance trouvé pour cette demande.'
+            ], 404);
+        }
+
+        return response()->json($actes);
+    }
+
 
     // Méthode pour mettre à jour un acte de naissance existant
     public function update(Request $request, $id)

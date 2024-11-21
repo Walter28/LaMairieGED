@@ -1,59 +1,97 @@
 <?php
 
-// app/Http/Controllers/NotificationController.php
-
 namespace App\Http\Controllers;
 
-use App\Models\Notification;
+use App\Models\TypeDocument;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class NotificationController extends Controller
+class TypeDocumentController extends Controller
 {
-    // Afficher la liste des notifications
+    /**
+     * Afficher tous les types de documents.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $notifications = Notification::all();
-        return response()->json($notifications);
+        $typeDocuments = TypeDocument::all();
+        return response()->json($typeDocuments);
     }
 
-    // Afficher une notification spécifique
-    public function show(Notification $notification)
+    /**
+     * Afficher un type de document par ID.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        return response()->json($notification);
+        $typeDocument = TypeDocument::find($id);
+
+        if ($typeDocument) {
+            return response()->json($typeDocument);
+        } else {
+            return response()->json(['message' => 'Type de document non trouvé.'], 404);
+        }
     }
 
-    // Créer une nouvelle notification
+    /**
+     * Créer un nouveau type de document.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'status' => 'required|string',
-            'message' => 'required|string',
+            'nom' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
-        $notification = Notification::create($request->all());
+        $typeDocument = TypeDocument::create($request->all());
 
-        return response()->json($notification, Response::HTTP_CREATED);
+        return response()->json($typeDocument, 201);
     }
 
-    // Mettre à jour une notification
-    public function update(Request $request, Notification $notification)
+    /**
+     * Mettre à jour un type de document existant.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string',
-            'message' => 'required|string',
+            'nom' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
-        $notification->update($request->all());
+        $typeDocument = TypeDocument::find($id);
 
-        return response()->json($notification);
+        if ($typeDocument) {
+            $typeDocument->update($request->all());
+            return response()->json($typeDocument);
+        } else {
+            return response()->json(['message' => 'Type de document non trouvé.'], 404);
+        }
     }
 
-    // Supprimer une notification
-    public function destroy(Notification $notification)
+    /**
+     * Supprimer un type de document.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $notification->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        $typeDocument = TypeDocument::find($id);
+
+        if ($typeDocument) {
+            $typeDocument->delete();
+            return response()->json(['message' => 'Type de document supprimé avec succès.']);
+        } else {
+            return response()->json(['message' => 'Type de document non trouvé.'], 404);
+        }
     }
 }

@@ -1,48 +1,59 @@
 <?php
 
+// app/Http/Controllers/NotificationController.php
+
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class NotificationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Afficher la liste des notifications
     public function index()
     {
-        //
+        $notifications = Notification::all();
+        return response()->json($notifications);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Afficher une notification spécifique
+    public function show(Notification $notification)
+    {
+        return response()->json($notification);
+    }
+
+    // Créer une nouvelle notification
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'status' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $notification = Notification::create($request->all());
+
+        return response()->json($notification, Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Mettre à jour une notification
+    public function update(Request $request, Notification $notification)
     {
-        //
+        $request->validate([
+            'status' => 'required|string',
+            'message' => 'required|string',
+        ]);
+
+        $notification->update($request->all());
+
+        return response()->json($notification);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Supprimer une notification
+    public function destroy(Notification $notification)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $notification->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
